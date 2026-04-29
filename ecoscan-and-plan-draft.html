@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoScan & Plan — Sustainable Shopping Made Easy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green-900: #14532d;
+            --green-800: #166534;
+            --green-700: #15803d;
+            --green-600: #16a34a;
+            --green-500: #22c55e;
+            --green-400: #4ade80;
+            --green-300: #86efac;
+            --green-200: #bbf7d0;
+            --green-100: #dcfce7;
+            --green-50:  #f0fdf4;
+            --gray-900: #111827;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+            --gray-500: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
+            --gray-200: #e5e7eb;
+            --gray-100: #f3f4f6;
+            --gray-50:  #f9fafb;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--gray-700);
+            line-height: 1.6;
+            background: var(--white);
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 68px;
+        }
+        .logo {
+            display: flex; align-items: center; gap: .6rem;
+            text-decoration: none; color: var(--green-800);
+            font-weight: 800; font-size: 1.25rem;
+        }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-600);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.1rem;
+        }
+        .logo small { font-weight: 500; color: var(--gray-500); font-size: .75rem; display: block; margin-top: -2px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--gray-600);
+            font-size: .9rem; font-weight: 500; transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--green-700); }
+        .btn {
+            display: inline-flex; align-items: center; gap: .5rem;
+            padding: .65rem 1.5rem; border-radius: 10px;
+            font-weight: 600; font-size: .9rem; text-decoration: none;
+            transition: all .2s; cursor: pointer; border: none;
+        }
+        .btn-primary { background: var(--green-600); color: white; }
+        .btn-primary:hover { background: var(--green-700); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .btn-outline { background: transparent; border: 2px solid var(--green-600); color: var(--green-700); }
+        .btn-outline:hover { background: var(--green-50); }
+        .btn-white { background: white; color: var(--green-800); }
+        .btn-white:hover { background: var(--green-50); transform: translateY(-1px); }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 140px 2rem 80px;
+            background: linear-gradient(160deg, var(--white) 0%, var(--green-50) 50%, var(--green-100) 100%);
+            position: relative; overflow: hidden;
+        }
+        .hero::after {
+            content: ''; position: absolute; top: -50%; right: -20%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+            position: relative; z-index: 1;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: .5rem;
+            background: var(--green-100); color: var(--green-800);
+            padding: .4rem 1rem; border-radius: 100px;
+            font-size: .8rem; font-weight: 600; margin-bottom: 1.5rem;
+            letter-spacing: .5px; text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 800; line-height: 1.1;
+            color: var(--gray-900); margin-bottom: 1.5rem;
+        }
+        .hero h1 span { color: var(--green-600); }
+        .hero p { font-size: 1.2rem; color: var(--gray-600); margin-bottom: 2rem; max-width: 500px; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-note { font-size: .85rem; color: var(--gray-500); margin-top: 1rem; }
+
+        /* Phone mockup */
+        .phone-mockup {
+            width: 280px; margin: 0 auto;
+            background: var(--gray-900); border-radius: 36px;
+            padding: 12px; box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+        .phone-screen {
+            background: var(--white); border-radius: 26px;
+            overflow: hidden; aspect-ratio: 9/17;
+        }
+        .phone-status {
+            background: var(--green-600); color: white;
+            padding: 12px 16px 8px; font-size: .7rem;
+            display: flex; justify-content: space-between;
+        }
+        .phone-header {
+            background: var(--green-600); color: white;
+            padding: 8px 16px 16px; text-align: center;
+        }
+        .phone-header h3 { font-size: .95rem; font-weight: 700; }
+        .phone-header p { font-size: .7rem; opacity: .85; }
+        .scan-result {
+            padding: 16px;
+        }
+        .scan-product {
+            background: var(--gray-50); border-radius: 12px; padding: 12px;
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+        }
+        .scan-product-img {
+            width: 48px; height: 48px; background: var(--green-100);
+            border-radius: 10px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.5rem;
+        }
+        .scan-product-info { flex: 1; }
+        .scan-product-info strong { font-size: .8rem; color: var(--gray-900); display: block; }
+        .scan-product-info small { font-size: .65rem; color: var(--gray-500); }
+        .score-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; border-radius: 50%;
+            font-weight: 800; font-size: .9rem; color: white;
+        }
+        .score-a { background: var(--green-600); }
+        .score-b { background: #84cc16; }
+        .score-detail {
+            background: var(--green-50); border-radius: 10px;
+            padding: 10px 12px; margin-bottom: 8px;
+        }
+        .score-detail-item {
+            display: flex; align-items: center; gap: 6px;
+            font-size: .7rem; color: var(--gray-700); padding: 3px 0;
+        }
+        .score-dot { width: 6px; height: 6px; border-radius: 50%; }
+        .dot-green { background: var(--green-500); }
+        .dot-yellow { background: #eab308; }
+        .alternative-card {
+            border: 1.5px solid var(--green-300); border-radius: 10px;
+            padding: 10px; display: flex; align-items: center; gap: 8px;
+        }
+        .alternative-card small { font-size: .65rem; color: var(--green-700); font-weight: 600; display: block; }
+        .alternative-card span { font-size: .7rem; color: var(--gray-600); }
+
+        /* ── SECTIONS ── */
+        section { padding: 80px 2rem; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-label {
+            display: inline-block; font-size: .75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--green-600); margin-bottom: .75rem;
+        }
+        .section-title {
+            font-size: 2.5rem; font-weight: 800; color: var(--gray-900);
+            margin-bottom: 1rem; line-height: 1.2;
+        }
+        .section-subtitle {
+            font-size: 1.1rem; color: var(--gray-500); max-width: 650px;
+            margin-bottom: 3rem;
+        }
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        /* ── PROBLEM ── */
+        .problem { background: var(--gray-50); }
+        .problem-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        }
+        .problem-card {
+            background: white; border-radius: 16px; padding: 2rem;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .problem-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .problem-icon {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 1.2rem;
+        }
+        .problem-icon.red { background: #fef2f2; }
+        .problem-icon.orange { background: #fff7ed; }
+        .problem-icon.yellow { background: #fefce8; }
+        .problem-card h3 { font-size: 1.1rem; color: var(--gray-900); margin-bottom: .5rem; font-weight: 700; }
+        .problem-card p { font-size: .9rem; color: var(--gray-600); }
+
+        /* ── HOW IT WORKS ── */
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+            position: relative;
+        }
+        .steps-grid::before {
+            content: ''; position: absolute; top: 48px;
+            left: calc(16.66% + 1rem); right: calc(16.66% + 1rem);
+            height: 2px; background: var(--green-200);
+        }
+        .step-card { text-align: center; position: relative; }
+        .step-number {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--green-600); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; font-weight: 800; margin: 0 auto 1.5rem;
+            position: relative; z-index: 1;
+            box-shadow: 0 0 0 6px var(--green-100);
+        }
+        .step-card h3 { font-size: 1.15rem; color: var(--gray-900); margin-bottom: .5rem; font-weight: 700; }
+        .step-card p { font-size: .9rem; color: var(--gray-600); max-width: 300px; margin: 0 auto; }
+
+        /* ── FEATURES ── */
+        .features { background: var(--gray-50); }
+        .feature-row {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 4rem; align-items: center; margin-bottom: 5rem;
+        }
+        .feature-row:last-child { margin-bottom: 0; }
+        .feature-row.reverse .feature-visual { order: -1; }
+        .feature-text .section-label { margin-bottom: .5rem; }
+        .feature-text h3 {
+            font-size: 1.8rem; font-weight: 800; color: var(--gray-900);
+            margin-bottom: 1rem; line-height: 1.3;
+        }
+        .feature-text p { font-size: 1rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+        .feature-list { list-style: none; }
+        .feature-list li {
+            display: flex; align-items: flex-start; gap: .75rem;
+            margin-bottom: .75rem; font-size: .95rem; color: var(--gray-700);
+        }
+        .feature-check {
+            width: 22px; height: 22px; min-width: 22px; border-radius: 50%;
+            background: var(--green-100); color: var(--green-700);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .75rem; font-weight: 700; margin-top: 2px;
+        }
+        .feature-visual {
+            background: white; border-radius: 20px;
+            padding: 2rem; box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        /* Scan demo UI */
+        .scan-demo-bar {
+            background: var(--gray-100); border-radius: 10px;
+            padding: 10px 14px; display: flex; align-items: center;
+            gap: 10px; margin-bottom: 16px; font-size: .85rem; color: var(--gray-500);
+        }
+        .scan-demo-bar .cam-icon {
+            width: 32px; height: 32px; background: var(--green-600);
+            border-radius: 8px; color: white; display: flex;
+            align-items: center; justify-content: center;
+        }
+        .scan-demo-result {
+            border: 2px solid var(--green-200); border-radius: 14px;
+            padding: 16px; display: flex; align-items: center; gap: 16px;
+        }
+        .scan-demo-score {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: var(--green-600); color: white;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column; min-width: 64px;
+        }
+        .scan-demo-score .letter { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+        .scan-demo-score .sub { font-size: .55rem; opacity: .8; }
+        .scan-demo-info h4 { font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+        .scan-demo-info p { font-size: .8rem; color: var(--gray-500); margin-bottom: 8px; }
+        .scan-demo-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .scan-tag {
+            padding: 3px 10px; border-radius: 100px;
+            font-size: .7rem; font-weight: 600;
+        }
+        .scan-tag.good { background: var(--green-100); color: var(--green-800); }
+        .scan-tag.neutral { background: #fef9c3; color: #854d0e; }
+
+        /* Meal plan demo UI */
+        .meal-plan-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 16px;
+        }
+        .meal-plan-header h4 { font-size: 1rem; font-weight: 700; color: var(--gray-900); }
+        .day-tabs { display: flex; gap: 4px; }
+        .day-tab {
+            padding: 4px 12px; border-radius: 8px;
+            font-size: .75rem; font-weight: 600; color: var(--gray-500);
+            background: var(--gray-100);
+        }
+        .day-tab.active { background: var(--green-600); color: white; }
+        .meal-card {
+            background: var(--gray-50); border-radius: 12px;
+            padding: 14px; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .meal-emoji {
+            width: 44px; height: 44px; background: white;
+            border-radius: 10px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.4rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .meal-info { flex: 1; }
+        .meal-info strong { font-size: .85rem; color: var(--gray-900); display: block; }
+        .meal-info span { font-size: .7rem; color: var(--gray-500); }
+        .meal-score-mini {
+            padding: 3px 10px; border-radius: 100px;
+            font-size: .7rem; font-weight: 700;
+            background: var(--green-100); color: var(--green-800);
+        }
+        .shopping-list-mini {
+            border: 1.5px dashed var(--green-300); border-radius: 12px;
+            padding: 12px 14px; margin-top: 10px;
+        }
+        .shopping-list-mini h5 { font-size: .8rem; color: var(--green-700); margin-bottom: 6px; font-weight: 700; }
+        .shopping-list-mini li {
+            font-size: .75rem; color: var(--gray-600);
+            list-style: none; padding: 2px 0;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .shopping-list-mini li::before { content: ''; width: 12px; height: 12px; border: 1.5px solid var(--green-400); border-radius: 3px; display: inline-block; }
+
+        /* ── BENEFITS ── */
+        .benefits-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+        }
+        .benefit-card {
+            text-align: center; padding: 2rem 1.5rem;
+            border-radius: 16px; background: var(--green-50);
+            border: 1px solid var(--green-100);
+            transition: transform .2s;
+        }
+        .benefit-card:hover { transform: translateY(-4px); }
+        .benefit-icon {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--green-600); color: white;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem; font-size: 1.4rem;
+        }
+        .benefit-card h3 { font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: .4rem; }
+        .benefit-card p { font-size: .85rem; color: var(--gray-600); }
+
+        /* ── DT OPPORTUNITY ── */
+        .dt-section { background: var(--green-900); color: white; }
+        .dt-section .section-label { color: var(--green-400); }
+        .dt-section .section-title { color: white; }
+        .dt-section .section-subtitle { color: rgba(255,255,255,.7); }
+        .dt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .dt-card {
+            background: rgba(255,255,255,.08); border-radius: 16px;
+            padding: 2rem; border: 1px solid rgba(255,255,255,.12);
+            transition: background .2s;
+        }
+        .dt-card:hover { background: rgba(255,255,255,.12); }
+        .dt-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .dt-card h3 { font-size: 1.1rem; font-weight: 700; color: white; margin-bottom: .5rem; }
+        .dt-card p { font-size: .9rem; color: rgba(255,255,255,.7); }
+
+        /* ── BUSINESS MODEL ── */
+        .bm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .bm-card {
+            background: var(--gray-50); border-radius: 16px; padding: 2rem;
+            border: 1px solid var(--gray-200);
+        }
+        .bm-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--gray-900); margin-bottom: 1rem; }
+        .bm-item {
+            display: flex; align-items: flex-start; gap: .75rem;
+            padding: .6rem 0; border-bottom: 1px solid var(--gray-200);
+        }
+        .bm-item:last-child { border-bottom: none; }
+        .bm-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--green-500); margin-top: 6px; min-width: 8px;
+        }
+        .bm-item p { font-size: .9rem; color: var(--gray-700); }
+        .bm-item strong { color: var(--gray-900); }
+
+        /* ── TEAM ── */
+        .team { background: var(--gray-50); }
+        .team-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+        }
+        .team-card {
+            background: white; border-radius: 16px; padding: 2rem;
+            text-align: center; box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200); transition: transform .2s;
+        }
+        .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .team-avatar {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: var(--green-100); color: var(--green-700);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem; font-size: 1.4rem; font-weight: 800;
+        }
+        .team-card h3 { font-size: 1rem; font-weight: 700; color: var(--gray-900); margin-bottom: .15rem; }
+        .team-card .role { font-size: .8rem; color: var(--green-600); font-weight: 600; }
+        .team-card .desc { font-size: .78rem; color: var(--gray-500); margin-top: .5rem; line-height: 1.4; }
+
+        /* ── TARGET MARKET ── */
+        .tm-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .tm-persona {
+            background: white; border-radius: 20px; padding: 2.5rem;
+            box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200);
+        }
+        .tm-persona-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .tm-persona-avatar {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-400), var(--green-600));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+        }
+        .tm-persona-header h4 { font-size: 1.1rem; font-weight: 700; color: var(--gray-900); }
+        .tm-persona-header p { font-size: .85rem; color: var(--gray-500); }
+        .tm-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .tm-stat {
+            background: var(--gray-50); border-radius: 12px; padding: 1rem;
+            text-align: center;
+        }
+        .tm-stat .num { font-size: 1.5rem; font-weight: 800; color: var(--green-600); display: block; }
+        .tm-stat .label { font-size: .75rem; color: var(--gray-500); }
+        .tm-traits { list-style: none; }
+        .tm-traits li {
+            padding: .5rem 0; border-bottom: 1px solid var(--gray-100);
+            font-size: .9rem; color: var(--gray-700);
+            display: flex; align-items: center; gap: .6rem;
+        }
+        .tm-traits li:last-child { border-bottom: none; }
+        .tm-right h3 { font-size: 1.5rem; font-weight: 800; color: var(--gray-900); margin-bottom: 1rem; }
+        .tm-right > p { font-size: .95rem; color: var(--gray-600); margin-bottom: 1.5rem; line-height: 1.7; }
+        .tm-why-card {
+            background: var(--green-50); border-radius: 14px; padding: 1.5rem;
+            border-left: 4px solid var(--green-500); margin-bottom: 1rem;
+        }
+        .tm-why-card h4 { font-size: .95rem; font-weight: 700; color: var(--green-800); margin-bottom: .3rem; }
+        .tm-why-card p { font-size: .85rem; color: var(--gray-600); }
+
+        /* ── FEASIBILITY ── */
+        .feas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .feas-card {
+            background: white; border-radius: 16px; padding: 2rem;
+            border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);
+        }
+        .feas-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); margin-bottom: .75rem; }
+        .feas-card p { font-size: .88rem; color: var(--gray-600); line-height: 1.6; }
+        .feas-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .feas-list { list-style: none; margin-top: .75rem; }
+        .feas-list li {
+            font-size: .85rem; color: var(--gray-600); padding: .35rem 0;
+            display: flex; align-items: flex-start; gap: .5rem;
+        }
+
+        /* ── FINANCIAL ── */
+        .fin-overview {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .fin-stat {
+            background: white; border-radius: 16px; padding: 1.5rem;
+            text-align: center; border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+        .fin-stat .fin-num { font-size: 1.8rem; font-weight: 800; color: var(--green-600); display: block; }
+        .fin-stat .fin-label { font-size: .8rem; color: var(--gray-500); margin-top: .25rem; display: block; }
+        .fin-table {
+            width: 100%; border-collapse: collapse;
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);
+        }
+        .fin-table th {
+            background: var(--green-600); color: white;
+            padding: .85rem 1.2rem; text-align: left; font-size: .85rem; font-weight: 600;
+        }
+        .fin-table td {
+            padding: .75rem 1.2rem; font-size: .88rem; color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .fin-table tr:last-child td { border-bottom: none; }
+        .fin-table .total td { font-weight: 700; color: var(--gray-900); background: var(--gray-50); }
+        .fin-note { font-size: .8rem; color: var(--gray-500); margin-top: 1rem; font-style: italic; }
+        .fin-tables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+        /* ── ETHICS ── */
+        .ethics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .ethics-card {
+            border-radius: 16px; padding: 2rem;
+            border: 1px solid var(--gray-200);
+        }
+        .ethics-card.risk { background: #fef2f2; border-color: #fecaca; }
+        .ethics-card.mitigation { background: var(--green-50); border-color: var(--green-200); }
+        .ethics-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+        .ethics-card.risk h3 { color: #991b1b; }
+        .ethics-card.mitigation h3 { color: var(--green-800); }
+        .ethics-item { padding: .6rem 0; border-bottom: 1px solid rgba(0,0,0,.06); }
+        .ethics-item:last-child { border-bottom: none; }
+        .ethics-item strong { font-size: .9rem; color: var(--gray-900); display: block; margin-bottom: .2rem; }
+        .ethics-item p { font-size: .85rem; color: var(--gray-600); }
+
+        /* ── MISSION / VISION ── */
+        .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+        .mv-card {
+            border-radius: 20px; padding: 2.5rem;
+            position: relative; overflow: hidden;
+        }
+        .mv-card.mission {
+            background: linear-gradient(135deg, var(--green-600), var(--green-800));
+            color: white;
+        }
+        .mv-card.vision {
+            background: var(--white);
+            border: 2px solid var(--green-200);
+            color: var(--gray-900);
+        }
+        .mv-card .mv-label {
+            font-size: .75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.5px; margin-bottom: .75rem;
+        }
+        .mv-card.mission .mv-label { color: var(--green-200); }
+        .mv-card.vision .mv-label { color: var(--green-600); }
+        .mv-card h3 { font-size: 1.5rem; font-weight: 700; line-height: 1.4; }
+        .mv-card.vision h3 { color: var(--gray-900); }
+
+        /* ── CTA ── */
+        .cta {
+            background: linear-gradient(135deg, var(--green-600) 0%, var(--green-800) 100%);
+            text-align: center; color: white;
+        }
+        .cta h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .cta p { font-size: 1.15rem; opacity: .9; margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .store-badge {
+            display: inline-flex; align-items: center; gap: .6rem;
+            background: rgba(0,0,0,.25); color: white; padding: .6rem 1.3rem;
+            border-radius: 10px; text-decoration: none; transition: background .2s;
+        }
+        .store-badge:hover { background: rgba(0,0,0,.4); }
+        .store-badge .store-text { text-align: left; }
+        .store-badge .store-text small { font-size: .6rem; display: block; opacity: .8; }
+        .store-badge .store-text span { font-size: .95rem; font-weight: 700; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--gray-900); color: rgba(255,255,255,.6);
+            padding: 3rem 2rem 2rem; text-align: center; font-size: .85rem;
+        }
+        footer .logo-footer {
+            color: white; font-weight: 800; font-size: 1.1rem;
+            margin-bottom: .5rem; display: block;
+        }
+        footer p { margin-bottom: .3rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .hero-inner, .feature-row, .mv-grid, .bm-grid, .tm-layout, .ethics-grid, .fin-tables-grid { grid-template-columns: 1fr; }
+            .problem-grid, .dt-grid, .steps-grid, .feas-grid { grid-template-columns: 1fr; }
+            .benefits-grid, .fin-overview { grid-template-columns: repeat(2, 1fr); }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .feature-row.reverse .feature-visual { order: 0; }
+            .steps-grid::before { display: none; }
+            .nav-links { display: none; }
+            .phone-mockup { width: 240px; }
+        }
+        @media (max-width: 600px) {
+            .benefits-grid, .team-grid, .fin-overview, .tm-stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo">
+            <div class="logo-icon">&#9752;</div>
+            <div>EcoScan & Plan<small>Scan. Plan. Shop sustainable.</small></div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#target-market">Target Market</a></li>
+            <li><a href="#why-it-matters">DT Opportunity</a></li>
+            <li><a href="#financials">Financials</a></li>
+            <li><a href="#ethics">Ethics & AI</a></li>
+            <li><a href="#about">Team</a></li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Download App</a>
+    </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+    <div class="hero-inner">
+        <div>
+            <div class="hero-badge">&#9889; Scan &middot; Plan &middot; Shop Smarter</div>
+            <h1>Sustainable shopping <span>made easy.</span></h1>
+            <p>Scan products for instant sustainability scores and plan healthy, sustainable meals in seconds. Making better choices has never been this simple.</p>
+            <div class="hero-buttons">
+                <a href="#cta" class="btn btn-primary">&#11015; Download the App</a>
+                <a href="#features" class="btn btn-outline">Try Demo</a>
+            </div>
+            <p class="hero-note">Available on iOS and Android</p>
+        </div>
+        <div>
+            <!-- Phone mockup -->
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="phone-status">
+                        <span>9:41</span>
+                        <span>&#128267; 87%</span>
+                    </div>
+                    <div class="phone-header">
+                        <h3>&#9752; EcoScan & Plan</h3>
+                        <p>Scan result</p>
+                    </div>
+                    <div class="scan-result">
+                        <div class="scan-product">
+                            <div class="scan-product-img">&#127851;</div>
+                            <div class="scan-product-info">
+                                <strong>Tony's Chocolonely</strong>
+                                <small>Dark 70% &middot; 180g</small>
+                            </div>
+                            <div class="score-badge score-a">A</div>
+                        </div>
+                        <div class="score-detail">
+                            <div class="score-detail-item"><span class="score-dot dot-green"></span> Fair trade certified</div>
+                            <div class="score-detail-item"><span class="score-dot dot-green"></span> Recyclable packaging</div>
+                            <div class="score-detail-item"><span class="score-dot dot-green"></span> Low CO&#8322; footprint</div>
+                        </div>
+                        <div class="alternative-card">
+                            <div class="scan-product-img" style="width:36px;height:36px;font-size:1rem;">&#127852;</div>
+                            <div>
+                                <small>&#9989; Also great</small>
+                                <span>Hands Off! &mdash; Score A-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ PROBLEM ═══════════ -->
+<section class="problem" id="problem">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">The Problem</span>
+            <h2 class="section-title">Sustainable shopping shouldn't be this hard</h2>
+            <p class="section-subtitle mx-auto">Consumers want to make better choices, but the current shopping experience makes it nearly impossible to know what's truly sustainable.</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon red">&#128565;</div>
+                <h3>Confusing information</h3>
+                <p>Dozens of eco-labels, vague claims, and contradictory information make it impossible to compare products quickly and confidently.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon orange">&#9203;</div>
+                <h3>No time to research</h3>
+                <p>Busy students and young professionals care about sustainability but don't have time to google every product while standing in the aisle.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon yellow">&#128269;</div>
+                <h3>No in-store guidance</h3>
+                <p>There is no simple, real-time tool available in supermarkets that helps consumers identify sustainable products at a glance.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section id="how-it-works">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">How It Works</span>
+            <h2 class="section-title">Three steps to a sustainable lifestyle</h2>
+            <p class="section-subtitle mx-auto">EcoScan & Plan turns complex sustainability data into instant, actionable insights — right when you need them.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Scan Products</h3>
+                <p>Point your camera at any product barcode in the supermarket and get an instant sustainability score from A to E.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Plan Meals</h3>
+                <p>Get personalized weekly meal plans based on your preferences, dietary needs, and sustainability goals.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Shop Smart</h3>
+                <p>Receive an auto-generated shopping list with the most sustainable product alternatives for your local store.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="features" id="features">
+    <div class="section-inner">
+        <div class="text-center" style="margin-bottom: 4rem;">
+            <span class="section-label">Features</span>
+            <h2 class="section-title">Everything you need to shop sustainably</h2>
+        </div>
+
+        <!-- Feature 1: Scan -->
+        <div class="feature-row">
+            <div class="feature-text">
+                <span class="section-label">Product Scanner</span>
+                <h3>Instant sustainability scores at your fingertips</h3>
+                <p>Scan any product barcode and get a clear A-to-E sustainability score based on CO&#8322; footprint, ingredients sourcing, packaging, and supply chain data.</p>
+                <ul class="feature-list">
+                    <li><span class="feature-check">&#10003;</span> Real-time barcode scanning with AI analysis</li>
+                    <li><span class="feature-check">&#10003;</span> Breakdown of environmental impact factors</li>
+                    <li><span class="feature-check">&#10003;</span> Instant better-alternative suggestions</li>
+                    <li><span class="feature-check">&#10003;</span> Database of 500,000+ products (NL & EU)</li>
+                </ul>
+            </div>
+            <div class="feature-visual">
+                <div class="scan-demo-bar">
+                    <div class="cam-icon">&#128247;</div>
+                    <span>Scanned: Tony's Chocolonely Dark 70%</span>
+                </div>
+                <div class="scan-demo-result">
+                    <div class="scan-demo-score">
+                        <span class="letter">A</span>
+                        <span class="sub">92/100</span>
+                    </div>
+                    <div class="scan-demo-info">
+                        <h4>Great choice!</h4>
+                        <p>This product scores highly on ethical sourcing and packaging.</p>
+                        <div class="scan-demo-tags">
+                            <span class="scan-tag good">&#127793; Low CO&#8322;</span>
+                            <span class="scan-tag good">&#9851; Recyclable</span>
+                            <span class="scan-tag good">&#129309; Fair trade</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 2: Meal Planner -->
+        <div class="feature-row reverse">
+            <div class="feature-text">
+                <span class="section-label">Meal Planner</span>
+                <h3>Sustainable meal plans, personalized for you</h3>
+                <p>Our AI generates weekly meal plans that balance taste, nutrition, budget, and sustainability. Adjust for allergies, preferences, and household size.</p>
+                <ul class="feature-list">
+                    <li><span class="feature-check">&#10003;</span> AI-powered personalized recipes</li>
+                    <li><span class="feature-check">&#10003;</span> Eco-score per meal and per week</li>
+                    <li><span class="feature-check">&#10003;</span> Auto-generated shopping list</li>
+                    <li><span class="feature-check">&#10003;</span> Adapts to seasonal and local products</li>
+                </ul>
+            </div>
+            <div class="feature-visual">
+                <div class="meal-plan-header">
+                    <h4>&#127860; This week's plan</h4>
+                    <div class="day-tabs">
+                        <span class="day-tab active">Mon</span>
+                        <span class="day-tab">Tue</span>
+                        <span class="day-tab">Wed</span>
+                        <span class="day-tab">Thu</span>
+                        <span class="day-tab">Fri</span>
+                    </div>
+                </div>
+                <div class="meal-card">
+                    <div class="meal-emoji">&#127858;</div>
+                    <div class="meal-info">
+                        <strong>Green Pesto Pasta</strong>
+                        <span>30 min &middot; Low CO&#8322;</span>
+                    </div>
+                    <span class="meal-score-mini">A</span>
+                </div>
+                <div class="meal-card">
+                    <div class="meal-emoji">&#129367;</div>
+                    <div class="meal-info">
+                        <strong>Chickpea Buddha Bowl</strong>
+                        <span>25 min &middot; Seasonal</span>
+                    </div>
+                    <span class="meal-score-mini">A+</span>
+                </div>
+                <div class="meal-card">
+                    <div class="meal-emoji">&#127835;</div>
+                    <div class="meal-info">
+                        <strong>Veggie Stir-Fry</strong>
+                        <span>20 min &middot; Local</span>
+                    </div>
+                    <span class="meal-score-mini">B+</span>
+                </div>
+                <div class="shopping-list-mini">
+                    <h5>&#128722; Auto shopping list</h5>
+                    <ul>
+                        <li>Pasta (whole wheat)</li>
+                        <li>Cherry tomatoes</li>
+                        <li>Spinach (local)</li>
+                        <li>Chickpeas (canned)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ BENEFITS ═══════════ -->
+<section id="benefits">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Benefits</span>
+            <h2 class="section-title">Why thousands of shoppers choose EcoScan & Plan</h2>
+            <p class="section-subtitle mx-auto">Making sustainable choices should be easy, affordable, and even fun.</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">&#127758;</div>
+                <h3>Good for the planet</h3>
+                <p>Make choices that reduce your environmental impact with every purchase.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">&#128176;</div>
+                <h3>Save money</h3>
+                <p>Waste less, buy smarter, and get the most value from your grocery budget.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">&#9889;</div>
+                <h3>Save time</h3>
+                <p>Scan, plan, and shop in just a few taps. No more label-reading or googling.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">&#127823;</div>
+                <h3>Eat better</h3>
+                <p>Healthy, balanced meals you'll love — tailored to your taste and lifestyle.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TARGET MARKET ═══════════ -->
+<section id="target-market">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Target Market</span>
+            <h2 class="section-title">Who we're building this for</h2>
+            <p class="section-subtitle mx-auto">Our primary customer segment is clearly defined, large enough to scale, and deeply underserved by current solutions.</p>
+        </div>
+        <div class="tm-layout">
+            <div class="tm-persona">
+                <div class="tm-persona-header">
+                    <div class="tm-persona-avatar">&#129489;</div>
+                    <div>
+                        <h4>Primary Persona: "Conscious Lisa"</h4>
+                        <p>24, MSc student in Groningen, shops at Albert Heijn 2x/week</p>
+                    </div>
+                </div>
+                <div class="tm-stat-grid">
+                    <div class="tm-stat">
+                        <span class="num">18&ndash;35</span>
+                        <span class="label">Age range</span>
+                    </div>
+                    <div class="tm-stat">
+                        <span class="num">4.2M</span>
+                        <span class="label">Target size NL</span>
+                    </div>
+                    <div class="tm-stat">
+                        <span class="num">73%</span>
+                        <span class="label">Want sustainable options</span>
+                    </div>
+                    <div class="tm-stat">
+                        <span class="num">68%</span>
+                        <span class="label">Find it too complex</span>
+                    </div>
+                </div>
+                <ul class="tm-traits">
+                    <li>&#127891; Students and young professionals in urban areas</li>
+                    <li>&#128241; Digital-native, uses apps daily for shopping decisions</li>
+                    <li>&#127793; Cares about sustainability but lacks time to research</li>
+                    <li>&#128176; Budget-conscious &mdash; wants value for money alongside eco-choices</li>
+                    <li>&#127858; Interested in healthy eating and meal planning</li>
+                </ul>
+            </div>
+            <div class="tm-right">
+                <h3>Why this segment?</h3>
+                <p>Young urban consumers (18&ndash;35) represent the ideal first-mover market for EcoScan &amp; Plan. They are digital natives who already use their smartphones in-store, they have strong sustainability values, and yet they consistently report that actually shopping sustainably is too time-consuming and confusing. This gap between intention and action is exactly what our app bridges.</p>
+
+                <div class="tm-why-card">
+                    <h4>&#127919; Market size & behavior</h4>
+                    <p>4.2 million Dutch consumers aged 18&ndash;35 do regular grocery shopping. 73% indicate they want sustainable options (Eurobarometer 2024), but only 26% actively choose them &mdash; a massive intention-action gap. The Dutch grocery market is worth &euro;48B annually, with sustainability-labeled products growing 12% year-over-year.</p>
+                </div>
+                <div class="tm-why-card">
+                    <h4>&#128200; Proven demand signals</h4>
+                    <p>Yuka (product scanning app) reached 2M Dutch users in 18 months &mdash; proving that consumers want in-store scanning tools. However, Yuka focuses on health, not sustainability. Our app fills this specific gap in the retail consumer journey.</p>
+                </div>
+                <div class="tm-why-card">
+                    <h4>&#9889; Why digital transformation fits</h4>
+                    <p>Traditional retail relies on physical labels and static information. Our solution digitally transforms the in-store experience by layering real-time AI-powered insights directly onto the consumer's shopping journey &mdash; bridging the offline retail world with digital intelligence.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ DT OPPORTUNITY ═══════════ -->
+<section class="dt-section" id="why-it-matters">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Digital Transformation in Retail</span>
+            <h2 class="section-title">How we digitally transform grocery shopping</h2>
+            <p class="section-subtitle mx-auto">Traditional grocery retail is built on physical shelves, static labels, and uninformed consumers. EcoScan &amp; Plan introduces a digital layer that fundamentally changes how customers interact with products in-store.</p>
+        </div>
+        <div class="dt-grid">
+            <div class="dt-card">
+                <div class="dt-card-icon">&#127978;</div>
+                <h3>From Static Labels to Real-Time Intelligence</h3>
+                <p>Retail currently relies on physical eco-labels that are fragmented and hard to compare. We digitize this by aggregating data from multiple databases (Open Food Facts, EU Ecolabel, supply chain data) and delivering a unified score instantly via mobile &mdash; transforming the point-of-purchase moment from guessing into informed decision-making.</p>
+            </div>
+            <div class="dt-card">
+                <div class="dt-card-icon">&#129302;</div>
+                <h3>AI as the New In-Store Advisor</h3>
+                <p>Where traditional retail depends on shelf placement and promotions to guide choices, our AI acts as a personalized sustainability advisor. It analyzes product data, learns from user preferences, and suggests better alternatives &mdash; creating a new digital touchpoint in the physical retail journey (Verhoef et al., 2021).</p>
+            </div>
+            <div class="dt-card">
+                <div class="dt-card-icon">&#128202;</div>
+                <h3>Data-Driven Value for the Retail Ecosystem</h3>
+                <p>Beyond the consumer, we generate aggregated sustainability insights for supermarkets and brands &mdash; enabling retailers to optimize sustainable assortments and brands to understand green consumer behavior. This creates a two-sided data network effect that strengthens over time (Hagiu &amp; Wright, 2020).</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ MISSION & VISION ═══════════ -->
+<section id="mission">
+    <div class="section-inner">
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <span class="section-label">Our Purpose</span>
+            <h2 class="section-title">Mission & Vision</h2>
+        </div>
+        <div class="mv-grid">
+            <div class="mv-card mission">
+                <div class="mv-label">Our Mission</div>
+                <h3>To empower every consumer to make sustainable grocery choices effortlessly — by turning complex product data into clear, instant, and actionable insights through AI technology.</h3>
+            </div>
+            <div class="mv-card vision">
+                <div class="mv-label">Our Vision</div>
+                <h3>A world where sustainable shopping is the default — where every consumer can scan, plan, and buy with confidence, making a positive impact with every purchase.</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FEASIBILITY ═══════════ -->
+<section class="problem" id="feasibility">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Feasibility</span>
+            <h2 class="section-title">How we make this work in practice</h2>
+            <p class="section-subtitle mx-auto">A realistic roadmap from data to product — showing investors this isn't just an idea, but an executable plan.</p>
+        </div>
+        <div class="feas-grid">
+            <div class="feas-card">
+                <div class="feas-icon">&#128451;</div>
+                <h3>Data: Where do we get it?</h3>
+                <p>Our sustainability scores are built on existing, proven open-data infrastructure &mdash; not built from scratch.</p>
+                <ul class="feas-list">
+                    <li>&#10003; <strong>Open Food Facts</strong> &mdash; open-source database with 3M+ products, including Dutch supermarkets (AH, Jumbo, Lidl)</li>
+                    <li>&#10003; <strong>EU PEF (Product Environmental Footprint)</strong> &mdash; standardized environmental impact data</li>
+                    <li>&#10003; <strong>Eco-label APIs</strong> &mdash; integration with existing certification databases (FSC, Rainforest Alliance, EU Ecolabel)</li>
+                    <li>&#10003; <strong>Barcode lookup</strong> &mdash; EAN/UPC global barcode registry for product identification</li>
+                </ul>
+            </div>
+            <div class="feas-card">
+                <div class="feas-icon">&#129302;</div>
+                <h3>AI: How reliable is it?</h3>
+                <p>We use AI as an aggregator and recommender &mdash; not as the sole source of truth. This keeps accuracy high and hallucination risk low.</p>
+                <ul class="feas-list">
+                    <li>&#10003; <strong>Scoring model</strong> &mdash; rule-based scoring (CO&#8322;, packaging, sourcing) with AI for edge cases only</li>
+                    <li>&#10003; <strong>Meal planning</strong> &mdash; GPT-based recipe generation with constraint filters (seasonal, local, dietary)</li>
+                    <li>&#10003; <strong>Human-in-the-loop</strong> &mdash; flagged products reviewed by sustainability experts before database entry</li>
+                    <li>&#10003; <strong>Transparency</strong> &mdash; users see the breakdown behind every score, not just a single number</li>
+                </ul>
+            </div>
+            <div class="feas-card">
+                <div class="feas-icon">&#128640;</div>
+                <h3>MVP: How do we start?</h3>
+                <p>We launch lean and expand based on traction. The MVP focuses on the core scan feature in one market.</p>
+                <ul class="feas-list">
+                    <li>&#10003; <strong>Phase 1 (0-6 months)</strong> &mdash; Barcode scanner + sustainability score for top 50K Dutch products. Launch in Groningen as test market.</li>
+                    <li>&#10003; <strong>Phase 2 (6-12 months)</strong> &mdash; Add AI meal planner and smart shopping list. Expand to Amsterdam, Rotterdam, Utrecht.</li>
+                    <li>&#10003; <strong>Phase 3 (12-18 months)</strong> &mdash; B2B dashboard for retailers. First supermarket integration pilot.</li>
+                    <li>&#10003; <strong>Tech stack</strong> &mdash; React Native (cross-platform), Python/FastAPI backend, PostgreSQL, hosted on AWS.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FINANCIALS ═══════════ -->
+<section id="financials">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Financial Plan</span>
+            <h2 class="section-title">The numbers behind EcoScan & Plan</h2>
+            <p class="section-subtitle mx-auto">A realistic financial picture for the first 12 months &mdash; what it costs, what we need, and when we break even.</p>
+        </div>
+        <div class="fin-overview">
+            <div class="fin-stat">
+                <span class="fin-num">&euro;285K</span>
+                <span class="fin-label">Seed investment needed</span>
+            </div>
+            <div class="fin-stat">
+                <span class="fin-num">&euro;18.5K</span>
+                <span class="fin-label">Monthly operating costs</span>
+            </div>
+            <div class="fin-stat">
+                <span class="fin-num">15K</span>
+                <span class="fin-label">Users for break-even</span>
+            </div>
+            <div class="fin-stat">
+                <span class="fin-num">Month 14</span>
+                <span class="fin-label">Projected break-even</span>
+            </div>
+        </div>
+        <div class="fin-tables-grid">
+            <div>
+                <h3 style="font-size:1.1rem; font-weight:700; color:#111827; margin-bottom:1rem;">Monthly Cost Breakdown (Year 1)</h3>
+                <table class="fin-table">
+                    <thead>
+                        <tr><th>Cost Category</th><th>Monthly</th><th>Annual</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Development team (3 FTE)</td><td>&euro;9,000</td><td>&euro;108,000</td></tr>
+                        <tr><td>Cloud & API infrastructure</td><td>&euro;2,500</td><td>&euro;30,000</td></tr>
+                        <tr><td>AI/ML costs (OpenAI API, compute)</td><td>&euro;1,500</td><td>&euro;18,000</td></tr>
+                        <tr><td>Data licensing & partnerships</td><td>&euro;1,000</td><td>&euro;12,000</td></tr>
+                        <tr><td>Marketing & user acquisition</td><td>&euro;3,000</td><td>&euro;36,000</td></tr>
+                        <tr><td>Legal, admin & office</td><td>&euro;1,500</td><td>&euro;18,000</td></tr>
+                        <tr class="total"><td>Total</td><td>&euro;18,500</td><td>&euro;222,000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h3 style="font-size:1.1rem; font-weight:700; color:#111827; margin-bottom:1rem;">Revenue Projections (Year 1)</h3>
+                <table class="fin-table">
+                    <thead>
+                        <tr><th>Revenue Stream</th><th>Assumption</th><th>Year 1</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Premium subscriptions</td><td>2,000 users &times; &euro;3.99/mo</td><td>&euro;95,760</td></tr>
+                        <tr><td>B2B retailer pilot</td><td>1 pilot contract (H2)</td><td>&euro;25,000</td></tr>
+                        <tr><td>Brand placements</td><td>5 brands &times; &euro;500/mo (H2)</td><td>&euro;15,000</td></tr>
+                        <tr><td>Data insights reports</td><td>2 reports &times; &euro;5,000</td><td>&euro;10,000</td></tr>
+                        <tr class="total"><td>Total projected revenue</td><td></td><td>&euro;145,760</td></tr>
+                    </tbody>
+                </table>
+                <p class="fin-note">* Break-even at ~15,000 active users with 15% premium conversion. Conservative scenario based on Yuka's NL adoption rate. Initial shortfall of ~&euro;76K covered by seed investment buffer.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ ETHICS & AI RISKS ═══════════ -->
+<section class="problem" id="ethics">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Ethics, Sustainability & AI Risks</span>
+            <h2 class="section-title">Due diligence for responsible innovation</h2>
+            <p class="section-subtitle mx-auto">We take the ethical, legal, and sustainability risks of our product seriously &mdash; and have concrete mitigation strategies for each.</p>
+        </div>
+        <div class="ethics-grid">
+            <div class="ethics-card risk">
+                <h3>&#9888; Identified Risks</h3>
+                <div class="ethics-item">
+                    <strong>Data privacy & GDPR</strong>
+                    <p>The app collects shopping behavior, dietary preferences, and location data &mdash; all personal data under GDPR. Risk of non-compliance or data breaches.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>AI bias & score reliability</strong>
+                    <p>Sustainability scores depend on data quality. Incomplete databases or biased training data could unfairly disadvantage certain brands or product categories.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>Greenwashing facilitation</strong>
+                    <p>If brands pay for visibility in recommendations, there's a risk of blurring the line between genuine sustainability and paid promotion.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>Digital exclusion</strong>
+                    <p>App-only access excludes older consumers or those without smartphones, potentially widening the sustainability information gap.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>Environmental cost of AI</strong>
+                    <p>Running AI models requires significant computing power and energy. The app's own carbon footprint could undermine its sustainability message.</p>
+                </div>
+            </div>
+            <div class="ethics-card mitigation">
+                <h3>&#9989; Mitigation Strategies</h3>
+                <div class="ethics-item">
+                    <strong>Privacy by design</strong>
+                    <p>GDPR-compliant from day one. Data minimization, on-device processing where possible, transparent data usage policy, and opt-in only for personalization features. Annual third-party privacy audit.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>Transparent scoring methodology</strong>
+                    <p>Open-source our scoring algorithm. Show users the full breakdown behind every score. Use human expert review for contested products. Regular methodology audits with independent sustainability researchers.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>Editorial independence policy</strong>
+                    <p>Strict separation between paid placements and organic recommendations. Paid content always labeled. Independent editorial board reviews the recommendation algorithm quarterly.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>Accessibility roadmap</strong>
+                    <p>Phase 2 includes a web-app version. Explore partnerships with supermarkets for in-store screens. Design for WCAG 2.1 AA accessibility standards.</p>
+                </div>
+                <div class="ethics-item">
+                    <strong>Green AI commitment</strong>
+                    <p>Use energy-efficient models (smallest model fit for purpose). Host on green cloud providers (AWS EU regions with renewable energy). Track and offset our own computational carbon footprint.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ BUSINESS MODEL ═══════════ -->
+<section id="business">
+    <div class="section-inner">
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <span class="section-label">Business Model</span>
+            <h2 class="section-title">How we create and capture value</h2>
+        </div>
+        <div class="bm-grid">
+            <div class="bm-card">
+                <h3>&#128200; Revenue Streams</h3>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>Freemium subscriptions</strong> &mdash; Free basic scanning; premium plans (meal planner, advanced analytics) at &euro;3.99/month</p></div>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>B2B partnerships</strong> &mdash; Supermarkets pay for in-store integration and sustainability analytics dashboards</p></div>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>Brand promotions</strong> &mdash; Sustainable brands pay for featured visibility in alternative suggestions</p></div>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>Data insights</strong> &mdash; Anonymized consumer sustainability trend reports for FMCG companies</p></div>
+            </div>
+            <div class="bm-card">
+                <h3>&#128736; Key Resources & Costs</h3>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>Product database</strong> &mdash; Open Food Facts + EU PEF data + proprietary partnerships</p></div>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>AI/ML infrastructure</strong> &mdash; Cloud computing for real-time analysis and meal planning</p></div>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>Development team</strong> &mdash; 3 FTE: mobile dev, backend engineer, data scientist</p></div>
+                <div class="bm-item"><div class="bm-dot"></div><p><strong>Marketing</strong> &mdash; Student ambassador programs, social media, university partnerships</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TEAM ═══════════ -->
+<section class="team" id="about">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Our Team</span>
+            <h2 class="section-title">Meet the founders</h2>
+            <p class="section-subtitle mx-auto">A multidisciplinary team of University of Groningen students passionate about technology and sustainability.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">NB</div>
+                <h3>Niels van Beets</h3>
+                <span class="role">CEO</span>
+                <p class="desc">Strategy, vision &amp; overall coordination</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">S</div>
+                <h3>Sven [achternaam]</h3>
+                <span class="role">Product Manager</span>
+                <p class="desc">Product development &amp; feature roadmap</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">M</div>
+                <h3>Merle [achternaam]</h3>
+                <span class="role">Marketing Manager</span>
+                <p class="desc">Brand, user acquisition &amp; communications</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">I</div>
+                <h3>Iris [achternaam]</h3>
+                <span class="role">Finance Manager</span>
+                <p class="desc">Financial planning, budgeting &amp; investor relations</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">H</div>
+                <h3>Hester [achternaam]</h3>
+                <span class="role">Business Development</span>
+                <p class="desc">Partnerships, market research &amp; growth</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">M</div>
+                <h3>Matthijs [achternaam]</h3>
+                <span class="role">Legal Manager</span>
+                <p class="desc">GDPR compliance, ethics &amp; legal framework</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta" id="cta">
+    <div class="section-inner">
+        <h2>Start your sustainable journey today.</h2>
+        <p>Scan. Plan. Shop. Repeat. Join thousands making a difference — one choice at a time.</p>
+        <div class="cta-buttons">
+            <a href="#" class="store-badge">
+                <span style="font-size:1.6rem;">&#63743;</span>
+                <div class="store-text">
+                    <small>Download on the</small>
+                    <span>App Store</span>
+                </div>
+            </a>
+            <a href="#" class="store-badge">
+                <span style="font-size:1.6rem;">&#9654;</span>
+                <div class="store-text">
+                    <small>Get it on</small>
+                    <span>Google Play</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+    <span class="logo-footer">&#9752; EcoScan & Plan</span>
+    <p>Scan. Plan. Shop sustainable.</p>
+    <p style="margin-top: 1rem; opacity: .5;">Group 19 &middot; Digital Business and Transformation &middot; University of Groningen &middot; 2025-2026</p>
+</footer>
+
+</body>
+</html>
