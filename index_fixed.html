@@ -1,0 +1,3028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoScan & Plan · AI-Driven Sustainable Shopping</title>
+<meta name="description" content="EcoScan & Plan is an AI-driven mobile app that helps young urban consumers scan products, understand sustainability scores and plan personal sustainable meals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --green-900: #14532d;
+    --green-800: #166534;
+    --green-700: #15803d;
+    --green-600: #16a34a;
+    --green-500: #22c55e;
+    --green-400: #4ade80;
+    --green-300: #86efac;
+    --green-200: #bbf7d0;
+    --green-100: #dcfce7;
+    --green-50:  #f0fdf4;
+    --cream:     #fdfbf5;
+    --cream-2:   #f7f3e9;
+    --gray-900: #111827;
+    --gray-800: #1f2937;
+    --gray-700: #374151;
+    --gray-600: #4b5563;
+    --gray-500: #6b7280;
+    --gray-400: #9ca3af;
+    --gray-300: #d1d5db;
+    --gray-200: #e5e7eb;
+    --gray-100: #f3f4f6;
+    --gray-50:  #f9fafb;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.18);
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 28px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--gray-700);
+    line-height: 1.6;
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+/* ── NAV ── */
+nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 1.5rem;
+}
+.nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+}
+.logo {
+    display: flex; align-items: center; gap: .65rem;
+    text-decoration: none; color: var(--green-800);
+    font-weight: 800; font-size: 1.2rem;
+}
+.logo-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--green-500), var(--green-700));
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(22,163,74,.25);
+}
+.logo small {
+    font-weight: 500; color: var(--gray-500);
+    font-size: .72rem; display: block; margin-top: -2px; letter-spacing: .2px;
+}
+.nav-links { display: flex; gap: 1.4rem; list-style: none; }
+.nav-links a {
+    text-decoration: none; color: var(--gray-700);
+    font-size: .88rem; font-weight: 500; transition: color .2s;
+}
+.nav-links a:hover { color: var(--green-700); }
+
+.btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .7rem 1.4rem; border-radius: 10px;
+    font-weight: 600; font-size: .9rem; text-decoration: none;
+    transition: all .2s; cursor: pointer; border: none;
+    font-family: inherit;
+}
+.btn-primary {
+    background: var(--green-600); color: white;
+    box-shadow: 0 4px 14px rgba(22,163,74,.3);
+}
+.btn-primary:hover { background: var(--green-700); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(22,163,74,.35); }
+.btn-outline {
+    background: transparent; border: 2px solid var(--green-600); color: var(--green-700);
+}
+.btn-outline:hover { background: var(--green-50); }
+.btn-ghost { background: transparent; color: var(--gray-700); }
+.btn-ghost:hover { color: var(--green-700); }
+
+.menu-toggle {
+    display: none;
+    background: transparent; border: none; cursor: pointer;
+    padding: .5rem;
+}
+.menu-toggle span {
+    display: block; width: 22px; height: 2px;
+    background: var(--gray-700); margin: 4px 0;
+    transition: all .25s;
+}
+
+/* ── HERO ── */
+.hero {
+    padding: 130px 1.5rem 80px;
+    background: linear-gradient(170deg, var(--cream) 0%, var(--green-50) 60%, var(--green-100) 100%);
+    position: relative; overflow: hidden;
+}
+.hero::before {
+    content: ''; position: absolute; top: -10%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(34,197,94,0.15) 0%, transparent 65%);
+    border-radius: 50%; pointer-events: none;
+}
+.hero::after {
+    content: ''; position: absolute; bottom: -20%; left: -15%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(132,204,22,0.10) 0%, transparent 65%);
+    border-radius: 50%; pointer-events: none;
+}
+.hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center;
+    position: relative; z-index: 1;
+}
+.hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: white; color: var(--green-800);
+    padding: .45rem 1rem; border-radius: 100px;
+    font-size: .78rem; font-weight: 700; margin-bottom: 1.25rem;
+    letter-spacing: .8px; text-transform: uppercase;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--green-100);
+}
+.hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800; line-height: 1.05;
+    color: var(--gray-900); margin-bottom: 1.4rem;
+    letter-spacing: -1px;
+}
+.hero h1 span {
+    color: var(--green-600);
+    background: linear-gradient(120deg, var(--green-600), var(--green-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero p { font-size: 1.15rem; color: var(--gray-600); margin-bottom: 2rem; max-width: 520px; }
+.hero-buttons { display: flex; gap: .85rem; flex-wrap: wrap; }
+.hero-note {
+    font-size: .85rem; color: var(--gray-500); margin-top: 1.25rem;
+    display: flex; align-items: center; gap: .5rem;
+}
+
+.hero-visual {
+    position: relative; min-height: 480px;
+}
+.hero-image-card {
+    position: absolute; inset: 0;
+    border-radius: var(--radius-2xl); overflow: hidden;
+    box-shadow: var(--shadow-2xl);
+    background: linear-gradient(135deg, var(--green-300), var(--green-600));
+}
+.hero-image-card img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+.hero-image-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(160deg, transparent 50%, rgba(20,83,45,.25) 100%);
+}
+.floating-card {
+    position: absolute;
+    background: white; border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow-xl);
+    display: flex; align-items: center; gap: 10px;
+    animation: floatY 4s ease-in-out infinite;
+    z-index: 2;
+}
+.floating-card .fc-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+}
+.floating-card .fc-text strong { display: block; font-size: .85rem; color: var(--gray-900); font-weight: 700; }
+.floating-card .fc-text small { font-size: .7rem; color: var(--gray-500); }
+
+.fc-top { top: 24px; left: -10px; animation-delay: -1.5s; }
+.fc-top .fc-icon { background: var(--green-100); color: var(--green-700); }
+.fc-bottom { bottom: 30px; right: -10px; animation-delay: -.5s; }
+.fc-bottom .fc-icon { background: var(--green-600); color: white; font-weight: 800; }
+
+@keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* ── SECTIONS ── */
+section { padding: 90px 1.5rem; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-label {
+    display: inline-block; font-size: .72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.6px;
+    color: var(--green-600); margin-bottom: .9rem;
+    padding: .35rem .85rem;
+    background: var(--green-50);
+    border-radius: 100px;
+    border: 1px solid var(--green-100);
+}
+.section-title {
+    font-size: clamp(1.9rem, 3.5vw, 2.5rem);
+    font-weight: 800; color: var(--gray-900);
+    margin-bottom: 1rem; line-height: 1.15;
+    letter-spacing: -.5px;
+}
+.section-subtitle {
+    font-size: 1.08rem; color: var(--gray-500); max-width: 660px;
+    margin-bottom: 3rem; line-height: 1.6;
+}
+.text-center { text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* ── PROBLEM ── */
+.problem { background: var(--gray-50); }
+.problem-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;
+}
+.problem-card {
+    background: white; border-radius: var(--radius-xl); padding: 2rem;
+    box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);
+    transition: transform .25s, box-shadow .25s;
+}
+.problem-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.problem-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 1.2rem;
+}
+.problem-icon.red { background: #fef2f2; }
+.problem-icon.orange { background: #fff7ed; }
+.problem-icon.yellow { background: #fefce8; }
+.problem-card h3 { font-size: 1.15rem; color: var(--gray-900); margin-bottom: .5rem; font-weight: 700; }
+.problem-card p { font-size: .92rem; color: var(--gray-600); }
+
+/* ── MISSION & VISION ── */
+.mv-section { background: white; }
+.mv-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem;
+}
+.mv-card {
+    background: var(--cream);
+    border: 1px solid var(--green-100);
+    border-radius: var(--radius-xl);
+    padding: 2.25rem;
+    position: relative;
+    overflow: hidden;
+}
+.mv-card::before {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(34,197,94,.12), transparent 65%);
+    border-radius: 50%;
+}
+.mv-card h3 {
+    display: flex; align-items: center; gap: .65rem;
+    font-size: 1.25rem; font-weight: 800; color: var(--gray-900);
+    margin-bottom: 1rem; position: relative;
+}
+.mv-card h3 .mv-icon {
+    width: 42px; height: 42px;
+    background: var(--green-600); color: white;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+}
+.mv-card p {
+    font-size: 1rem; color: var(--gray-700); position: relative;
+    line-height: 1.65;
+}
+.mv-card .mv-tag {
+    display: inline-block; font-size: .7rem; font-weight: 700;
+    color: var(--green-700); background: var(--green-100);
+    padding: .25rem .65rem; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: .85rem; position: relative;
+}
+
+/* ── TARGET CUSTOMER ── */
+.target { background: var(--gray-50); }
+.target-grid {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center;
+}
+.target-text > p { font-size: 1.02rem; color: var(--gray-600); margin-bottom: 1.5rem; }
+.target-profile {
+    background: white; border-radius: var(--radius-xl); padding: 2rem;
+    border: 1px solid var(--green-100); box-shadow: var(--shadow-md);
+}
+.tp-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.tp-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-400), var(--green-700));
+    color: white; font-size: 1.6rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+}
+.tp-head h4 { font-size: 1.1rem; color: var(--gray-900); font-weight: 800; }
+.tp-head small { font-size: .82rem; color: var(--gray-500); }
+.tp-row {
+    display: flex; gap: .9rem; padding: .7rem 0;
+    border-bottom: 1px solid var(--gray-100);
+    align-items: flex-start;
+}
+.tp-row:last-child { border-bottom: none; }
+.tp-key {
+    font-size: .72rem; font-weight: 700; color: var(--green-700);
+    text-transform: uppercase; letter-spacing: .8px;
+    min-width: 110px; padding-top: 2px;
+}
+.tp-val { font-size: .9rem; color: var(--gray-700); flex: 1; }
+
+.target-points {
+    list-style: none;
+}
+.target-points li {
+    display: flex; gap: .85rem; padding: .6rem 0;
+    font-size: .96rem; color: var(--gray-700);
+    align-items: flex-start;
+}
+.target-points .tp-icon {
+    width: 26px; height: 26px; min-width: 26px;
+    background: var(--green-100); color: var(--green-700);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; font-weight: 700;
+    margin-top: 2px;
+}
+.target-points li strong { color: var(--gray-900); }
+
+/* ── MARKET / NUMBERS ── */
+.market { background: white; }
+.market-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+.market-stat {
+    background: var(--cream);
+    border: 1px solid var(--green-100);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all .25s;
+}
+.market-stat:hover { transform: translateY(-4px); border-color: var(--green-300); box-shadow: var(--shadow-md); }
+.market-stat .ms-num {
+    font-size: 2.1rem; font-weight: 800; color: var(--green-700);
+    display: block; line-height: 1.1; margin-bottom: .4rem;
+}
+.market-stat .ms-label {
+    font-size: .88rem; color: var(--gray-700); font-weight: 600; display: block;
+    margin-bottom: .35rem;
+}
+.market-stat .ms-source {
+    font-size: .72rem; color: var(--gray-500); display: block;
+}
+.market-note {
+    font-size: .82rem; color: var(--gray-500); font-style: italic;
+    text-align: center;
+}
+
+/* ── HOW IT WORKS ── */
+.steps-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    position: relative;
+    margin-bottom: 4rem;
+}
+.steps-grid::before {
+    content: ''; position: absolute; top: 30px;
+    left: calc(16.66% + 2rem); right: calc(16.66% + 2rem);
+    height: 2px; background: repeating-linear-gradient(90deg, var(--green-300) 0 6px, transparent 6px 12px);
+}
+.step-card {
+    text-align: center; position: relative;
+    background: var(--cream);
+    border-radius: var(--radius-xl);
+    padding: 2.25rem 1.75rem 2rem;
+    border: 1px solid var(--green-100);
+}
+.step-number {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-500), var(--green-700));
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.35rem; font-weight: 800; margin: -50px auto 1.2rem;
+    position: relative; z-index: 1;
+    box-shadow: 0 0 0 6px white, 0 8px 16px rgba(22,163,74,.25);
+}
+.step-card h3 { font-size: 1.2rem; color: var(--gray-900); margin-bottom: .5rem; font-weight: 700; }
+.step-card p { font-size: .92rem; color: var(--gray-600); }
+
+.benefits-pill-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem;
+}
+.benefit-pill {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    transition: all .25s;
+}
+.benefit-pill:hover { border-color: var(--green-300); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.benefit-pill .bp-icon { font-size: 1.6rem; margin-bottom: .5rem; display: block; }
+.benefit-pill strong { display: block; font-size: .92rem; color: var(--gray-900); margin-bottom: .15rem; }
+.benefit-pill span { font-size: .78rem; color: var(--gray-500); }
+
+/* ── PRODUCT DETAIL DEMO ── */
+.product-demo { background: linear-gradient(180deg, var(--cream) 0%, white 100%); }
+.demo-layout {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem;
+    align-items: stretch;
+}
+.demo-left h3 {
+    font-size: 1.6rem; font-weight: 800;
+    color: var(--gray-900); margin-bottom: .85rem; line-height: 1.25;
+}
+.demo-left > p {
+    color: var(--gray-600); margin-bottom: 1.5rem; font-size: 1rem;
+}
+.demo-cta {
+    display: inline-flex; align-items: center; gap: .4rem;
+    color: var(--green-700); font-weight: 600; font-size: .9rem;
+    background: var(--green-50); padding: .55rem 1rem;
+    border-radius: 100px; border: 1px solid var(--green-200);
+    margin-bottom: 1.75rem;
+}
+.product-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: .85rem;
+}
+.product-card {
+    background: white; border: 1.5px solid var(--gray-200);
+    border-radius: 14px; padding: .9rem;
+    cursor: pointer; transition: all .2s;
+    display: flex; gap: .75rem; align-items: center;
+    text-align: left;
+    font-family: inherit;
+    width: 100%;
+}
+.product-card:hover, .product-card.active {
+    border-color: var(--green-500);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+.product-card.active { background: var(--green-50); border-color: var(--green-600); }
+.product-card .pc-img {
+    width: 44px; height: 44px;
+    background: var(--green-100); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+}
+.product-card .pc-info { flex: 1; min-width: 0; }
+.product-card .pc-info strong {
+    display: block; font-size: .82rem;
+    color: var(--gray-900); white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+}
+.product-card .pc-info small { font-size: .7rem; color: var(--gray-500); }
+.product-card .pc-score {
+    width: 30px; height: 30px; border-radius: 50%;
+    color: white; font-weight: 800; font-size: .8rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.score-A { background: var(--green-600); }
+.score-B { background: #84cc16; }
+.score-C { background: #f59e0b; }
+.score-D { background: #ef4444; }
+
+.demo-detail {
+    background: white;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+    padding: 1.75rem;
+    height: 100%;
+    transition: all .3s;
+}
+.dd-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--gray-100); margin-bottom: 1.1rem;
+}
+.dd-head .dd-title { flex: 1; }
+.dd-head .dd-title h4 {
+    font-size: 1.2rem; font-weight: 800; color: var(--gray-900);
+    margin-bottom: .15rem;
+}
+.dd-head .dd-title small { font-size: .82rem; color: var(--gray-500); }
+.dd-score-large {
+    width: 64px; height: 64px; border-radius: 50%;
+    color: white; font-size: 1.6rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 14px rgba(22,163,74,.3);
+}
+.dd-section { margin-bottom: 1.1rem; }
+.dd-section h5 {
+    font-size: .72rem; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gray-500);
+    font-weight: 700; margin-bottom: .55rem;
+}
+.dd-breakdown {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem;
+}
+.dd-breakdown .bd-item {
+    background: var(--green-50); border-radius: 10px;
+    padding: .5rem .7rem;
+    font-size: .78rem; color: var(--gray-700);
+    display: flex; justify-content: space-between; align-items: center;
+}
+.dd-breakdown .bd-item .bd-val {
+    font-weight: 700; color: var(--green-700);
+    font-size: .72rem;
+}
+.dd-supplier {
+    background: var(--gray-50); border-radius: 10px;
+    padding: .8rem;
+}
+.dd-supplier strong {
+    display: block; font-size: .88rem;
+    color: var(--gray-900); margin-bottom: .15rem;
+}
+.dd-supplier small { font-size: .78rem; color: var(--gray-600); display: block; margin-bottom: .4rem; }
+.dd-supplier .source-badge {
+    display: inline-flex; align-items: center; gap: .3rem;
+    background: white; color: var(--green-700);
+    padding: .2rem .55rem; border-radius: 100px;
+    font-size: .7rem; font-weight: 600;
+    border: 1px solid var(--green-200);
+}
+.dd-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+.dd-tag {
+    padding: .25rem .65rem; border-radius: 100px;
+    font-size: .72rem; font-weight: 600;
+    background: var(--green-100); color: var(--green-800);
+}
+.dd-alt {
+    border: 1.5px solid var(--green-300);
+    border-radius: 10px; padding: .6rem .75rem;
+    display: flex; align-items: center; gap: .65rem;
+    font-size: .82rem;
+}
+.dd-alt .alt-emoji {
+    width: 30px; height: 30px; background: var(--green-100);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+}
+.dd-alt .alt-name { font-weight: 600; color: var(--gray-900); }
+.dd-alt .alt-score {
+    margin-left: auto; background: var(--green-600); color: white;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; font-weight: 800;
+}
+
+/* ── AI MEAL PLANNER ── */
+.meal-section { background: var(--gray-50); }
+.meal-layout {
+    display: grid; grid-template-columns: 1fr 1.05fr; gap: 3.5rem;
+    align-items: center;
+}
+.meal-text h3 {
+    font-size: 1.7rem; font-weight: 800;
+    color: var(--gray-900); line-height: 1.25;
+    margin-bottom: 1rem;
+}
+.meal-text > p {
+    font-size: 1rem; color: var(--gray-600); margin-bottom: 1.5rem;
+}
+.meal-badges {
+    display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem;
+}
+.meal-badge {
+    background: white; padding: .45rem .9rem;
+    border-radius: 100px; font-size: .82rem; font-weight: 600;
+    color: var(--green-800); border: 1px solid var(--green-200);
+    display: inline-flex; align-items: center; gap: .35rem;
+}
+.meal-points { list-style: none; margin-top: 1rem; }
+.meal-points li {
+    display: flex; gap: .8rem; padding: .55rem 0;
+    font-size: .92rem; color: var(--gray-700);
+    align-items: flex-start;
+}
+.meal-points .mp-icon {
+    width: 24px; height: 24px; min-width: 24px;
+    background: var(--green-100); color: var(--green-700);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; font-weight: 700;
+    margin-top: 2px;
+}
+.meal-disclaimer {
+    background: white; border: 1px dashed var(--gray-300);
+    border-radius: 12px; padding: .85rem 1rem;
+    margin-top: 1.5rem;
+    font-size: .82rem; color: var(--gray-600);
+}
+.meal-disclaimer strong { color: var(--gray-800); }
+
+.week-plan {
+    background: white; border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: 1.75rem; border: 1px solid var(--gray-200);
+}
+.week-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.25rem;
+}
+.week-head h4 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); }
+.week-head .week-co2 {
+    background: var(--green-50);
+    color: var(--green-800);
+    padding: .35rem .75rem;
+    border-radius: 100px;
+    font-size: .75rem; font-weight: 600;
+    border: 1px solid var(--green-200);
+}
+.week-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: .35rem;
+    margin-bottom: 1rem;
+}
+.week-day {
+    aspect-ratio: 1/1.15;
+    background: var(--green-50);
+    border-radius: 10px;
+    padding: .5rem;
+    display: flex; flex-direction: column; justify-content: space-between;
+    text-align: center; font-size: .68rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+}
+.week-day:hover { border-color: var(--green-400); }
+.week-day.active { background: var(--green-600); color: white; border-color: var(--green-700); }
+.week-day .wd-name {
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: .5px; font-size: .65rem;
+    color: var(--gray-500);
+}
+.week-day.active .wd-name { color: rgba(255,255,255,.8); }
+.week-day .wd-emoji { font-size: 1.3rem; }
+.week-day .wd-score { font-weight: 800; font-size: .72rem; }
+
+.week-meal {
+    background: var(--green-50);
+    border-radius: 14px; padding: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+    border-left: 4px solid var(--green-500);
+}
+.week-meal .wm-emoji { font-size: 2rem; }
+.week-meal .wm-info { flex: 1; }
+.week-meal .wm-info strong {
+    display: block; font-size: 1rem; color: var(--gray-900); font-weight: 700;
+}
+.week-meal .wm-info small { font-size: .78rem; color: var(--gray-600); }
+.week-meal .wm-tags {
+    display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .35rem;
+}
+.wm-tag {
+    background: white; color: var(--green-700);
+    font-size: .68rem; font-weight: 600;
+    padding: .15rem .55rem; border-radius: 100px;
+    border: 1px solid var(--green-200);
+}
+
+.nutrition-bars { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-100); }
+.nutrition-bars h5 {
+    font-size: .72rem; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gray-500);
+    font-weight: 700; margin-bottom: .65rem;
+}
+.nb-row {
+    display: grid; grid-template-columns: 80px 1fr 32px;
+    align-items: center; gap: .65rem; margin-bottom: .35rem;
+    font-size: .78rem;
+}
+.nb-bar { height: 6px; border-radius: 100px; background: var(--gray-100); overflow: hidden; }
+.nb-bar .nb-fill {
+    height: 100%; border-radius: 100px;
+    background: linear-gradient(90deg, var(--green-400), var(--green-600));
+    transition: width .8s;
+}
+.nb-row .nb-val { font-weight: 600; color: var(--gray-700); text-align: right; font-size: .72rem; }
+
+/* ── COMPETITOR COMPARISON ── */
+.compare { background: white; }
+.compare-table-wrap {
+    background: white; border-radius: var(--radius-xl); overflow: hidden;
+    border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);
+}
+.compare-table { width: 100%; border-collapse: collapse; }
+.compare-table th, .compare-table td {
+    padding: 1rem 1.1rem; text-align: center;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: .9rem;
+}
+.compare-table th {
+    background: var(--green-50); color: var(--green-800);
+    font-weight: 700; font-size: .82rem;
+    text-transform: uppercase; letter-spacing: .5px;
+}
+.compare-table td:first-child, .compare-table th:first-child {
+    text-align: left; font-weight: 600; color: var(--gray-800);
+}
+.compare-table th.us {
+    background: var(--green-600); color: white;
+}
+.compare-table td.us {
+    background: var(--green-50); color: var(--green-800); font-weight: 700;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.tick { color: var(--green-600); font-weight: 800; }
+.cross { color: var(--gray-400); }
+.compare-note {
+    margin-top: 1.5rem;
+    background: var(--cream);
+    border: 1px solid var(--green-100);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.4rem;
+    font-size: .92rem; color: var(--gray-700);
+}
+.compare-note strong { color: var(--gray-900); }
+
+/* ── DT OPPORTUNITY ── */
+.dt-section { background: var(--gray-50); }
+.dt-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.25rem;
+}
+.dt-card {
+    background: white; border-radius: var(--radius-lg);
+    padding: 1.5rem 1.25rem;
+    border: 1px solid var(--gray-200);
+    transition: all .25s;
+    text-align: center;
+}
+.dt-card:hover { border-color: var(--green-300); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.dt-card-icon {
+    width: 50px; height: 50px;
+    background: var(--green-100); color: var(--green-700);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin: 0 auto 1rem;
+}
+.dt-card h3 { font-size: .98rem; color: var(--gray-900); margin-bottom: .4rem; font-weight: 700; }
+.dt-card p { font-size: .82rem; color: var(--gray-600); line-height: 1.55; }
+
+/* ── FINANCIAL OVERVIEW ── */
+.financial { background: var(--cream); }
+.fin-intro {
+    background: white; border-radius: var(--radius-xl);
+    border: 1px solid var(--green-100); padding: 1.75rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+.fin-intro p { font-size: 1rem; color: var(--gray-700); line-height: 1.7; }
+.fin-intro strong { color: var(--gray-900); }
+
+.fin-block {
+    background: white; border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+.fin-block-head {
+    background: var(--green-50);
+    padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: .75rem;
+    border-bottom: 1px solid var(--green-100);
+}
+.fin-block-head .fbh-icon {
+    width: 36px; height: 36px;
+    background: var(--green-600); color: white;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+}
+.fin-block-head h3 { font-size: 1.1rem; color: var(--gray-900); font-weight: 800; }
+.fin-block-body { padding: 1.5rem; }
+.fin-block-body p { color: var(--gray-700); margin-bottom: 1rem; font-size: .95rem; }
+
+.fin-overview {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.fin-stat {
+    background: var(--cream); border-radius: var(--radius-lg); padding: 1.4rem;
+    text-align: center; border: 1px solid var(--green-100);
+}
+.fin-stat .fin-num {
+    font-size: 1.7rem; font-weight: 800;
+    color: var(--green-700); display: block; line-height: 1.1;
+}
+.fin-stat .fin-label {
+    font-size: .8rem; color: var(--gray-600);
+    margin-top: .35rem; display: block;
+}
+
+.fin-table-wrap {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200); overflow: hidden;
+}
+.fin-table { width: 100%; border-collapse: collapse; }
+.fin-table th {
+    background: var(--green-50); color: var(--green-800);
+    padding: .9rem 1.2rem; text-align: left;
+    font-size: .82rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px;
+}
+.fin-table td {
+    padding: .85rem 1.2rem; font-size: .92rem; color: var(--gray-700);
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+}
+.fin-table td.num { white-space: nowrap; font-weight: 600; color: var(--gray-800); }
+.fin-table tr:last-child td { border-bottom: none; }
+.fin-table .total td {
+    font-weight: 800; color: var(--green-800);
+    background: var(--green-50);
+    font-size: .96rem;
+}
+.fin-table .negative td { color: #b91c1c; }
+.fin-note { font-size: .82rem; color: var(--gray-500); margin-top: 1rem; font-style: italic; }
+
+.breakeven-card {
+    background: linear-gradient(135deg, var(--green-50), var(--cream));
+    border: 1px solid var(--green-200);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: center;
+}
+.breakeven-card .be-num {
+    font-size: 2.2rem; font-weight: 800; color: var(--green-700); line-height: 1;
+}
+.breakeven-card .be-label {
+    font-size: .75rem; color: var(--green-800); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; margin-top: .35rem;
+}
+.breakeven-card p {
+    font-size: .92rem; color: var(--gray-700); margin: 0;
+}
+
+.invest-card {
+    background: linear-gradient(135deg, var(--green-700), var(--green-900));
+    color: white; border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+    position: relative; overflow: hidden;
+    display: grid;
+    grid-template-columns: .85fr 1.15fr;
+    gap: 1.5rem;
+    align-items: center;
+}
+.invest-card::before {
+    content: ''; position: absolute; top: -50%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,.1), transparent 70%);
+    border-radius: 50%; pointer-events: none;
+}
+.invest-card > * { position: relative; z-index: 1; }
+.invest-card .invest-main { text-align: left; }
+.invest-card .invest-amount {
+    font-size: clamp(2.75rem, 5vw, 4rem); font-weight: 800; line-height: 1;
+    margin-bottom: .5rem;
+}
+.invest-card .invest-label {
+    font-size: .9rem; text-transform: uppercase;
+    letter-spacing: 1.5px; opacity: .9;
+    margin-bottom: 1rem;
+}
+.invest-card .invest-explain {
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 18px;
+    padding: 1.25rem 1.35rem;
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    backdrop-filter: blur(6px);
+}
+.invest-card .invest-explain p {
+    color: #fff;
+    opacity: 1;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+}
+.invest-card .invest-explain strong { color: #fff; font-weight: 800; }
+.invest-breakdown-mini {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .55rem;
+    margin-top: 1rem;
+}
+.invest-mini {
+    background: rgba(255,255,255,.13);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 12px;
+    padding: .65rem .55rem;
+    text-align: center;
+}
+.invest-mini strong { display: block; color: #fff; font-size: .95rem; line-height: 1.1; }
+.invest-mini span { display: block; color: rgba(255,255,255,.84); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-top: .25rem; }
+.invest-allocation {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+.invest-alloc-card {
+    background: var(--cream); border-radius: var(--radius-lg);
+    padding: 1.25rem; border: 1px solid var(--green-100);
+    text-align: center;
+}
+.invest-alloc-card .ia-num {
+    font-size: 1.4rem; font-weight: 800;
+    color: var(--green-700); margin-bottom: .15rem;
+}
+.invest-alloc-card .ia-label {
+    font-size: .78rem; color: var(--gray-700); font-weight: 700;
+    text-transform: uppercase; letter-spacing: .5px;
+}
+.invest-alloc-card .ia-desc {
+    font-size: .82rem; color: var(--gray-600); margin-top: .35rem;
+}
+
+/* ── BUSINESS MODEL ── */
+.bizmodel { background: white; }
+.bm-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+.bm-card {
+    background: var(--cream);
+    border: 1px solid var(--green-100);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    transition: all .25s;
+    display: flex; flex-direction: column;
+}
+.bm-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--green-300); }
+.bm-card .bm-icon-top {
+    width: 48px; height: 48px;
+    background: var(--green-600); color: white;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1rem;
+}
+.bm-card h3 {
+    font-size: 1.05rem; font-weight: 800; color: var(--gray-900);
+    margin-bottom: .35rem;
+}
+.bm-card .bm-amount {
+    display: inline-block;
+    font-size: .82rem; font-weight: 700; color: var(--green-700);
+    background: white; padding: .25rem .65rem; border-radius: 100px;
+    border: 1px solid var(--green-200);
+    margin-bottom: .85rem;
+}
+.bm-card p { font-size: .9rem; color: var(--gray-700); line-height: 1.6; }
+
+.free-scans-card {
+    background: linear-gradient(135deg, var(--green-700), var(--green-900));
+    color: white; border-radius: var(--radius-xl);
+    padding: 2rem 2.25rem;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center;
+}
+.free-scans-card .fs-icon {
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,.15);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+}
+.free-scans-card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: .5rem; }
+.free-scans-card p { opacity: .92; font-size: .95rem; line-height: 1.6; }
+.free-scans-card .fs-rule {
+    background: rgba(255,255,255,.12);
+    border-left: 3px solid var(--green-400);
+    padding: .65rem .9rem;
+    border-radius: 8px;
+    font-size: .9rem; font-style: italic;
+    margin-top: .75rem;
+}
+
+/* ── WHY INVEST ── */
+.invest-section { background: var(--gray-50); }
+.invest-reasons {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
+    margin-bottom: 2.25rem;
+}
+.invest-reason {
+    background: white; border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    border: 1px solid var(--gray-200);
+    display: grid; grid-template-columns: auto 1fr; gap: 1.2rem;
+    align-items: flex-start;
+    transition: all .25s;
+}
+.invest-reason:hover { border-color: var(--green-300); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.invest-reason .ir-num {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--green-500), var(--green-700));
+    color: white; font-size: 1.2rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+}
+.invest-reason h3 {
+    font-size: 1.1rem; font-weight: 800; color: var(--gray-900);
+    margin-bottom: .4rem;
+}
+.invest-reason p { font-size: .92rem; color: var(--gray-600); line-height: 1.6; }
+.invest-reason ul { margin-top: .5rem; padding-left: 1.1rem; }
+.invest-reason ul li { font-size: .88rem; color: var(--gray-700); padding: .15rem 0; }
+
+.investor-perks {
+    background: white; border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+.investor-perks h3 {
+    background: var(--green-50); color: var(--green-800);
+    padding: 1rem 1.5rem; font-size: 1rem; font-weight: 800;
+    border-bottom: 1px solid var(--green-100);
+}
+.investor-perks table { width: 100%; border-collapse: collapse; }
+.investor-perks td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: .92rem;
+}
+.investor-perks tr:last-child td { border-bottom: none; }
+.investor-perks td:first-child {
+    font-weight: 700; color: var(--gray-900);
+    width: 30%; vertical-align: top;
+}
+.investor-perks td:last-child { color: var(--gray-700); }
+
+.key-numbers {
+    background: white; border-radius: var(--radius-xl);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+}
+.key-numbers h3 {
+    background: var(--green-50); color: var(--green-800);
+    padding: 1rem 1.5rem; font-size: 1rem; font-weight: 800;
+    border-bottom: 1px solid var(--green-100);
+}
+.key-numbers table { width: 100%; border-collapse: collapse; }
+.key-numbers th, .key-numbers td {
+    padding: .85rem 1.5rem;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: .92rem;
+    text-align: left;
+}
+.key-numbers th {
+    background: var(--gray-50); color: var(--gray-700);
+    font-weight: 700; font-size: .78rem;
+    text-transform: uppercase; letter-spacing: .5px;
+}
+.key-numbers td:nth-child(2) { font-weight: 700; color: var(--green-700); white-space: nowrap; }
+.key-numbers tr:last-child td { border-bottom: none; }
+
+/* ── OPERATIONS ── */
+.ops-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;
+}
+.ops-card {
+    background: white; border-radius: var(--radius-xl);
+    padding: 2rem; border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-sm);
+}
+.ops-card h3 {
+    font-size: 1.2rem; font-weight: 800;
+    color: var(--gray-900); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: .65rem;
+}
+.ops-card h3 .ops-icon {
+    width: 40px; height: 40px;
+    background: var(--green-100); color: var(--green-700);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.15rem;
+}
+.ops-list { list-style: none; }
+.ops-list li {
+    padding: .8rem 0;
+    border-bottom: 1px solid var(--gray-100);
+    display: grid; grid-template-columns: 30px 1fr;
+    gap: .75rem; align-items: flex-start;
+}
+.ops-list li:last-child { border-bottom: none; }
+.ops-list .ops-bullet {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: var(--green-100); color: var(--green-700);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; font-weight: 700;
+    margin-top: 2px;
+}
+.ops-list strong { color: var(--gray-900); display: block; font-size: .95rem; }
+.ops-list small { font-size: .82rem; color: var(--gray-600); display: block; margin-top: .15rem; }
+
+/* ── LEGAL & ETHICS ── */
+.legal { background: var(--cream); }
+.legal-intro {
+    background: white; border-radius: var(--radius-xl);
+    border: 1px solid var(--green-100);
+    padding: 1.75rem 2rem; margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+.legal-intro p { font-size: 1rem; color: var(--gray-700); line-height: 1.7; }
+.legal-intro p + p { margin-top: .85rem; }
+
+.privacy-statement {
+    background: white; border-radius: var(--radius-xl);
+    border: 1px solid var(--green-200);
+    padding: 1.75rem 2rem; margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+.privacy-statement h3 {
+    font-size: 1.15rem; font-weight: 800; color: var(--gray-900);
+    margin-bottom: .85rem;
+    display: flex; align-items: center; gap: .65rem;
+}
+.privacy-statement h3 .ps-icon {
+    width: 38px; height: 38px;
+    background: var(--green-100); color: var(--green-700);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+}
+.privacy-statement p { font-size: .95rem; color: var(--gray-700); margin-bottom: .85rem; line-height: 1.65; }
+.privacy-statement ul {
+    list-style: none; margin-top: .85rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1.25rem;
+}
+.privacy-statement ul li {
+    padding-left: 1.4rem; position: relative;
+    font-size: .9rem; color: var(--gray-700);
+}
+.privacy-statement ul li::before {
+    content: '✓'; position: absolute; left: 0;
+    color: var(--green-600); font-weight: 700;
+}
+
+.legal-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.legal-summary-card {
+    background: white;
+    border: 1px solid var(--green-100);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+}
+.legal-summary-card .lsc-icon {
+    width: 42px; height: 42px;
+    background: var(--green-100);
+    color: var(--green-700);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: .85rem;
+}
+.legal-summary-card h3 {
+    font-size: .98rem;
+    color: var(--gray-900);
+    font-weight: 800;
+    margin-bottom: .35rem;
+}
+.legal-summary-card p { font-size: .84rem; color: var(--gray-600); line-height: 1.55; }
+.legal-matrix {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+.legal-matrix h3 {
+    background: var(--green-50);
+    color: var(--green-800);
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    border-bottom: 1px solid var(--green-100);
+}
+.legal-matrix table { width: 100%; border-collapse: collapse; }
+.legal-matrix th, .legal-matrix td {
+    padding: .9rem 1.1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: .88rem;
+    vertical-align: top;
+}
+.legal-matrix th {
+    background: var(--gray-50);
+    color: var(--gray-700);
+    font-size: .75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .55px;
+}
+.legal-matrix tr:last-child td { border-bottom: none; }
+.legal-matrix td:first-child { font-weight: 800; color: var(--gray-900); }
+.legal-chip-row { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .8rem; }
+.legal-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    background: var(--green-50);
+    color: var(--green-800);
+    border: 1px solid var(--green-200);
+    border-radius: 100px;
+    padding: .25rem .65rem;
+    font-size: .72rem;
+    font-weight: 700;
+}
+.risk-body .legal-basis {
+    background: var(--green-50);
+    border: 1px solid var(--green-100);
+    border-radius: 10px;
+    padding: .7rem .8rem;
+    margin-top: .85rem;
+    font-size: .78rem;
+    color: var(--green-900);
+    line-height: 1.5;
+}
+.risk-body .legal-basis strong { color: var(--green-800); }
+
+.risk-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    margin-bottom: 1rem;
+}
+.risk-card {
+    background: white; border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+    overflow: hidden;
+    transition: all .25s;
+}
+.risk-card:hover { box-shadow: var(--shadow-md); }
+.risk-head {
+    padding: 1.2rem 1.4rem;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem;
+    background: white;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+    transition: background .2s;
+}
+.risk-head:hover { background: var(--gray-50); }
+.risk-head .rh-left { display: flex; align-items: center; gap: .85rem; }
+.risk-head .rh-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: #fef2f2; color: #dc2626;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+}
+.risk-head .rh-cat {
+    font-size: .68rem; color: var(--gray-500); font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px; display: block;
+}
+.risk-head strong { color: var(--gray-900); font-size: .98rem; font-weight: 700; }
+.risk-head .rh-arrow {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--green-50); color: var(--green-700);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .2s;
+    font-size: .85rem;
+}
+.risk-card.open .rh-arrow { transform: rotate(180deg); }
+.risk-body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.risk-card.open .risk-body { max-height: 600px; }
+.risk-body-inner { padding: 0 1.4rem 1.4rem; }
+.risk-body p {
+    font-size: .88rem; color: var(--gray-600);
+    margin-bottom: .8rem; padding-top: .5rem;
+}
+.risk-body h6 {
+    font-size: .72rem; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--green-700);
+    font-weight: 700; margin-bottom: .5rem;
+}
+.risk-body ul { list-style: none; }
+.risk-body ul li {
+    font-size: .85rem; color: var(--gray-700);
+    padding: .25rem 0; padding-left: 1.2rem;
+    position: relative;
+}
+.risk-body ul li::before {
+    content: '✓'; position: absolute; left: 0;
+    color: var(--green-600); font-weight: 700;
+}
+
+/* ── TRUST COMMITMENT ── */
+.trust { background: white; }
+.trust-card {
+    background: linear-gradient(135deg, var(--green-700) 0%, var(--green-900) 100%);
+    color: white;
+    border-radius: var(--radius-2xl);
+    padding: 3rem;
+    position: relative; overflow: hidden;
+}
+.trust-card::before {
+    content: '✓';
+    position: absolute; top: -40px; right: -30px;
+    font-size: 280px; opacity: .07;
+    font-weight: 900;
+    pointer-events: none;
+}
+.trust-card .trust-label {
+    font-size: .78rem; text-transform: uppercase;
+    letter-spacing: 2px; opacity: .85; margin-bottom: 1rem;
+    display: inline-block;
+    background: rgba(255,255,255,.12);
+    padding: .4rem .9rem; border-radius: 100px;
+    font-weight: 600;
+}
+.trust-card h2 {
+    font-size: 2rem; font-weight: 800;
+    margin-bottom: 1.5rem; max-width: 700px;
+    letter-spacing: -.5px;
+}
+.trust-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    margin-top: 2rem;
+}
+.trust-item {
+    display: flex; gap: .85rem; align-items: flex-start;
+    background: rgba(255,255,255,.08);
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.12);
+}
+.trust-item .ti-check {
+    width: 26px; height: 26px; min-width: 26px;
+    background: var(--green-400);
+    border-radius: 50%; color: var(--green-900);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: .85rem;
+    margin-top: 1px;
+}
+.trust-item p { font-size: .92rem; opacity: .95; line-height: 1.5; }
+
+/* ── DATA DISCLOSURE ── */
+.data-section { background: var(--gray-50); }
+.data-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    margin-bottom: 2rem;
+}
+.data-card {
+    background: white; border-radius: var(--radius-xl);
+    padding: 2rem; border: 1px solid var(--gray-200);
+}
+.data-card h3 {
+    font-size: 1.15rem; font-weight: 800;
+    color: var(--gray-900); margin-bottom: .35rem;
+    display: flex; align-items: center; gap: .65rem;
+}
+.data-card .data-icon {
+    width: 38px; height: 38px;
+    background: var(--green-100); color: var(--green-700);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+}
+.data-card > p {
+    color: var(--gray-600); font-size: .9rem;
+    margin-bottom: 1.25rem;
+}
+.data-list { list-style: none; }
+.data-list li {
+    padding: .55rem 0;
+    font-size: .92rem; color: var(--gray-700);
+    display: flex; gap: .65rem; align-items: flex-start;
+    border-bottom: 1px solid var(--gray-100);
+}
+.data-list li:last-child { border-bottom: none; }
+.data-list li::before {
+    content: '•'; color: var(--green-600);
+    font-weight: 800; font-size: 1.1rem;
+    line-height: 1.2;
+}
+
+.sources-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    margin-top: 1rem;
+}
+.source-card {
+    background: white; border-radius: var(--radius-lg);
+    padding: 1.25rem 1rem;
+    border: 1px solid var(--green-100);
+    text-align: center;
+    transition: all .2s;
+}
+.source-card:hover { border-color: var(--green-400); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+.source-card .src-icon {
+    width: 44px; height: 44px;
+    background: var(--green-100); color: var(--green-700);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin: 0 auto .65rem;
+}
+.source-card strong { display: block; font-size: .92rem; color: var(--gray-900); margin-bottom: .25rem; }
+.source-card small { font-size: .76rem; color: var(--gray-500); line-height: 1.45; display: block; }
+
+/* ── TEAM ── */
+.team { background: white; }
+.team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.team-card {
+    background: var(--cream);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    text-align: center;
+    border: 1px solid var(--green-100);
+    transition: all .25s;
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--green-300); }
+.team-avatar {
+    width: 70px; height: 70px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-400), var(--green-700));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 1.3rem;
+    box-shadow: 0 6px 14px rgba(22,163,74,.2);
+}
+.team-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-900); }
+.team-card .role {
+    display: inline-block; font-size: .75rem;
+    color: var(--green-700); font-weight: 700;
+    background: white; padding: .2rem .65rem;
+    border-radius: 100px; margin: .35rem 0 .55rem;
+    border: 1px solid var(--green-200);
+}
+.team-card .desc { font-size: .82rem; color: var(--gray-600); }
+
+.team-credit { margin-top: 2.5rem; text-align: center; color: var(--gray-500); font-size: .88rem; }
+.team-credit strong { color: var(--gray-700); }
+
+/* ── GENAI REFLECTION ── */
+.genai { background: var(--gray-50); padding-bottom: 60px; }
+.genai-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 2.25rem;
+    border: 1px solid var(--gray-200);
+    display: grid; grid-template-columns: auto 1fr; gap: 2rem;
+    align-items: center;
+}
+.genai-icon-wrap {
+    width: 90px; height: 90px;
+    background: linear-gradient(135deg, var(--green-100), var(--green-300));
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem;
+}
+.genai-text h3 { font-size: 1.3rem; font-weight: 800; color: var(--gray-900); margin-bottom: .5rem; }
+.genai-text p { font-size: .92rem; color: var(--gray-600); margin-bottom: .85rem; }
+.genai-text ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .35rem .85rem; }
+.genai-text ul li {
+    font-size: .85rem; color: var(--gray-700);
+    padding-left: 1.1rem; position: relative;
+}
+.genai-text ul li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--green-600); font-weight: 700;
+}
+
+/* ── CTA ── */
+.cta {
+    background: linear-gradient(135deg, var(--green-700) 0%, var(--green-900) 100%);
+    text-align: center; color: white;
+    position: relative; overflow: hidden;
+}
+.cta::before {
+    content: ''; position: absolute;
+    top: -30%; left: -20%; width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(132,204,22,.15), transparent 65%);
+    border-radius: 50%; pointer-events: none;
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta h2 {
+    font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 800;
+    margin-bottom: 1rem; letter-spacing: -.5px;
+}
+.cta p {
+    font-size: 1.1rem; opacity: .9; margin-bottom: 2rem;
+    max-width: 560px; margin-left: auto; margin-right: auto;
+}
+.cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.store-badge {
+    display: inline-flex; align-items: center; gap: .65rem;
+    background: rgba(0,0,0,.3); color: white; padding: .7rem 1.4rem;
+    border-radius: 12px; text-decoration: none; transition: all .2s;
+    border: 1px solid rgba(255,255,255,.1);
+}
+.store-badge:hover { background: black; transform: translateY(-2px); }
+.store-badge .store-text { text-align: left; }
+.store-badge .store-text small { font-size: .65rem; display: block; opacity: .85; }
+.store-badge .store-text span { font-size: .98rem; font-weight: 700; }
+
+/* ── FOOTER ── */
+footer {
+    background: var(--gray-900); color: rgba(255,255,255,.6);
+    padding: 3rem 1.5rem 2rem; text-align: center; font-size: .85rem;
+}
+footer .logo-footer {
+    color: white; font-weight: 800; font-size: 1.15rem;
+    margin-bottom: .5rem; display: inline-flex;
+    align-items: center; gap: .5rem;
+}
+footer p { margin-bottom: .35rem; }
+.footer-credit { margin-top: 1.25rem; opacity: .55; font-size: .78rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 980px) {
+    .nav-links { display: none; }
+    .menu-toggle { display: block; }
+    .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 70px; left: 0; right: 0;
+        background: white; padding: 1rem 1.5rem;
+        gap: 0; border-bottom: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-md);
+    }
+    .nav-links.open li { padding: .85rem 0; border-bottom: 1px solid var(--gray-100); }
+    .nav-links.open li:last-child { border-bottom: none; }
+
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-visual { min-height: 400px; }
+    .demo-layout, .meal-layout, .data-grid,
+    .mv-grid, .target-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .ops-grid { grid-template-columns: 1fr; }
+    .problem-grid, .steps-grid { grid-template-columns: 1fr; }
+    .steps-grid::before { display: none; }
+    .step-number { margin: 0 auto 1rem; }
+    .dt-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefits-pill-grid { grid-template-columns: repeat(2, 1fr); }
+    .fin-overview, .market-stats { grid-template-columns: repeat(2, 1fr); }
+    .invest-allocation, .bm-grid { grid-template-columns: 1fr; }
+    .invest-reasons { grid-template-columns: 1fr; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .legal-summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .invest-card { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .genai-card { grid-template-columns: 1fr; text-align: center; }
+    .genai-icon-wrap { margin: 0 auto; }
+    .genai-text ul { grid-template-columns: 1fr; }
+    .product-grid { grid-template-columns: 1fr; }
+    .sources-grid { grid-template-columns: repeat(2, 1fr); }
+    .free-scans-card { grid-template-columns: 1fr; text-align: center; }
+    .free-scans-card .fs-icon { margin: 0 auto; }
+    .breakeven-card { grid-template-columns: 1fr; text-align: center; }
+    .privacy-statement ul { grid-template-columns: 1fr; }
+    .compare-table { font-size: .78rem; }
+    .compare-table th, .compare-table td { padding: .65rem .5rem; }
+    section { padding: 70px 1.25rem; }
+    .trust-card { padding: 2rem; }
+    .trust-card h2 { font-size: 1.5rem; }
+}
+@media (max-width: 600px) {
+    .fin-overview, .market-stats { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .dt-grid { grid-template-columns: 1fr; }
+    .sources-grid { grid-template-columns: 1fr; }
+    .nav-inner { padding: 0 .25rem; }
+    .logo small { display: none; }
+    .hero { padding-top: 110px; }
+    .hero-buttons .btn { width: 100%; justify-content: center; }
+    .floating-card { display: none; }
+    .week-days { gap: .25rem; }
+    .week-day { padding: .35rem; }
+    .invest-card { padding: 1.5rem; }
+    .invest-card .invest-amount { font-size: 2.5rem; }
+    .invest-breakdown-mini { grid-template-columns: 1fr; }
+    .legal-summary-grid { grid-template-columns: 1fr; }
+    .legal-matrix th, .legal-matrix td { padding: .7rem .75rem; font-size: .78rem; }
+    .invest-reason { grid-template-columns: 1fr; }
+}
+
+.sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo" aria-label="EcoScan and Plan home">
+            <div class="logo-icon" aria-hidden="true">☘</div>
+            <div>EcoScan &amp; Plan<small>Scan. Plan. Shop sustainable.</small></div>
+        </a>
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="primary-nav">
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#features">Product</a></li>
+            <li><a href="#financial">Financials</a></li>
+            <li><a href="#business-model">Business Model</a></li>
+            <li><a href="#invest">Invest</a></li>
+            <li><a href="#legal">Ethics &amp; Legal</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <a href="#invest" class="btn btn-primary">Invest in us</a>
+    </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+    <div class="hero-inner">
+        <div>
+            <span class="hero-badge">⚡ AI-Driven · Scan · Plan · Shop</span>
+            <h1>The AI-driven app for <span>sustainable shopping.</span></h1>
+            <p>EcoScan &amp; Plan is an AI-driven mobile app that scans any grocery product for an instant sustainability score, builds personal meal plans based on your goals, and turns sustainable choices into a daily habit.</p>
+            <div class="hero-buttons">
+                <a href="#invest" class="btn btn-primary">⬇ Invest in EcoScan &amp; Plan</a>
+                <a href="#features" class="btn btn-outline">See the product</a>
+                <a href="#how-it-works" class="btn btn-ghost">How it works →</a>
+            </div>
+            <p class="hero-note">📱 Available on iOS &amp; Android &nbsp;·&nbsp; Free to scan, freemium model</p>
+        </div>
+        <div class="hero-visual" aria-hidden="false">
+            <div class="hero-image-card">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80&auto=format&fit=crop"
+                     alt="Young consumer scanning a product in a supermarket aisle">
+            </div>
+            <div class="floating-card fc-top" aria-hidden="true">
+                <div class="fc-icon">☘</div>
+                <div class="fc-text">
+                    <strong>Score: A</strong>
+                    <small>Low CO₂ · Fair trade</small>
+                </div>
+            </div>
+            <div class="floating-card fc-bottom" aria-hidden="true">
+                <div class="fc-icon">B</div>
+                <div class="fc-text">
+                    <strong>Better alternative</strong>
+                    <small>2 nearby in store</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════ PROBLEM ═══════════ -->
+<section class="problem" id="problem">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">The Problem</span>
+            <h2 class="section-title">Sustainable shopping should not feel like research</h2>
+            <p class="section-subtitle mx-auto">A growing number of consumers want to make better choices in the supermarket, but the experience makes it nearly impossible to know what is actually sustainable in the moment.</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon red" aria-hidden="true">🏷️</div>
+                <h3>Confusing labels</h3>
+                <p>Dozens of eco-labels, vague claims and contradictory information make it hard to compare products quickly and confidently.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon orange" aria-hidden="true">⏳</div>
+                <h3>Time-consuming research</h3>
+                <p>Busy students and young professionals care about sustainability, but they do not have time to google every product while standing in the aisle.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon yellow" aria-hidden="true">🔍</div>
+                <h3>Unclear sustainability impact</h3>
+                <p>There is no simple, real-time tool in supermarkets that shows the true environmental impact of what we put in our basket. Greenwashing makes it even harder to trust what brands claim.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ MISSION & VISION ═══════════ -->
+<section class="mv-section" id="mission">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Mission &amp; Vision</span>
+            <h2 class="section-title">What we do today, and the future we want to build</h2>
+            <p class="section-subtitle mx-auto">EcoScan &amp; Plan exists because sustainable choices should not require expertise, extra time or guesswork.</p>
+        </div>
+        <div class="mv-grid">
+            <div class="mv-card">
+                <span class="mv-tag">Mission</span>
+                <h3><span class="mv-icon" aria-hidden="true">🎯</span> Our mission</h3>
+                <p>We make sustainable grocery shopping simple, fast and trustworthy. By combining AI-driven product scanning with personalised meal planning, we help young urban consumers turn good intentions into everyday sustainable choices, without having to read every label or research every brand.</p>
+            </div>
+            <div class="mv-card">
+                <span class="mv-tag">Vision</span>
+                <h3><span class="mv-icon" aria-hidden="true">🌍</span> Our vision</h3>
+                <p>A future where sustainable shopping is the default, not the exception. We want EcoScan &amp; Plan to be the trusted layer between consumers and the food system: independent, transparent, and powerful enough that lower-impact products become the natural everyday choice for the next generation of shoppers.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TARGET CUSTOMER ═══════════ -->
+<section class="target" id="target">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Target Customer</span>
+            <h2 class="section-title">Built for the next generation of conscious shoppers</h2>
+            <p class="section-subtitle mx-auto">Our first customer is specific: young urban consumers who already care about sustainability but lack a fast, trustworthy way to act on it in the supermarket.</p>
+        </div>
+        <div class="target-grid">
+            <div class="target-text">
+                <p>Our primary segment is young urban consumers aged <strong>18 to 35</strong>: mainly students and starting young professionals living in or around cities. They live busy, app-first lives, manage their groceries between lectures, work and social plans, and shop at regular supermarkets such as Albert Heijn, Jumbo, Lidl or Aldi rather than at specialty stores.</p>
+                <ul class="target-points">
+                    <li><span class="tp-icon">1</span><div><strong>They value sustainability but lack time.</strong> Sustainability is a real driver of their choices, but reading labels and researching every brand is not realistic during a weekly grocery run.</div></li>
+                    <li><span class="tp-icon">2</span><div><strong>They are digitally native.</strong> They trust apps for fitness, finance and dating, and expect the same level of clarity for sustainability.</div></li>
+                    <li><span class="tp-icon">3</span><div><strong>They have limited budgets.</strong> They want better choices without paying premium prices for greenwashed products they cannot verify.</div></li>
+                    <li><span class="tp-icon">4</span><div><strong>They are reachable.</strong> This segment is concentrated in cities and active on Instagram, TikTok and YouTube, which makes targeted, affordable user acquisition possible.</div></li>
+                    <li><span class="tp-icon">5</span><div><strong>They are loyalty builders.</strong> Once they trust a tool, this group tends to use it weekly, share it with friends and stay with it as they move into higher-income years.</div></li>
+                </ul>
+            </div>
+            <div class="target-profile" aria-label="Primary user persona">
+                <div class="tp-head">
+                    <div class="tp-avatar" aria-hidden="true">L</div>
+                    <div>
+                        <h4>Lisa, 24</h4>
+                        <small>Urban student / young professional</small>
+                    </div>
+                </div>
+                <div class="tp-row"><span class="tp-key">Age</span><span class="tp-val">18 to 35, focus on 22 to 28</span></div>
+                <div class="tp-row"><span class="tp-key">Location</span><span class="tp-val">Lives in or near a Dutch city, shops at regular supermarkets</span></div>
+                <div class="tp-row"><span class="tp-key">Lifestyle</span><span class="tp-val">Busy, app-first, environmentally aware, social media active</span></div>
+                <div class="tp-row"><span class="tp-key">Income</span><span class="tp-val">Limited budget, willing to pay for value, not for buzzwords</span></div>
+                <div class="tp-row"><span class="tp-key">Pain</span><span class="tp-val">Wants sustainable groceries but does not have time to compare</span></div>
+                <div class="tp-row"><span class="tp-key">Pays for</span><span class="tp-val">Meal planning, smart shopping lists and personal sustainability filters</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ MARKET / NUMBERS ═══════════ -->
+<section class="market" id="market">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Market Opportunity</span>
+            <h2 class="section-title">A growing market with a real gap to fill</h2>
+            <p class="section-subtitle mx-auto">Sustainable consumption is moving from niche to mainstream. The food system is one of the largest sources of global emissions, and digital tools that help people choose better are still scarce. The numbers below are widely cited industry estimates that we use to size the opportunity.</p>
+        </div>
+        <div class="market-stats">
+            <div class="market-stat">
+                <span class="ms-num">~33%</span>
+                <span class="ms-label">Of all food produced is wasted globally</span>
+                <span class="ms-source">Source: FAO estimate</span>
+            </div>
+            <div class="market-stat">
+                <span class="ms-num">~26%</span>
+                <span class="ms-label">Share of global greenhouse gas emissions linked to food</span>
+                <span class="ms-source">Source: Our World in Data, based on Poore &amp; Nemecek</span>
+            </div>
+            <div class="market-stat">
+                <span class="ms-num">~60%</span>
+                <span class="ms-label">Of European consumers say they want to shop more sustainably</span>
+                <span class="ms-source">Source: European consumer surveys, industry estimate</span>
+            </div>
+            <div class="market-stat">
+                <span class="ms-num">$50B+</span>
+                <span class="ms-label">Projected size of the AI in food &amp; agriculture market by 2030</span>
+                <span class="ms-source">Source: Industry research estimate</span>
+            </div>
+        </div>
+        <p class="market-note">All figures are widely cited industry estimates used to size the opportunity. They are not internal projections of EcoScan &amp; Plan and may vary across sources.</p>
+    </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section id="how-it-works">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">How It Works</span>
+            <h2 class="section-title">Three steps to a more sustainable lifestyle</h2>
+            <p class="section-subtitle mx-auto">EcoScan &amp; Plan turns complex sustainability data into instant, actionable insights, exactly when you need them.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Scan products</h3>
+                <p>Point your camera at any product in store and instantly see a clear sustainability score and the data behind it.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Plan meals</h3>
+                <p>AI generates personalised, balanced and sustainable meal plans based on your preferences, dietary needs and budget.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Shop smarter</h3>
+                <p>Get an auto-generated shopping list with better alternatives, lower CO₂ options and seasonal swaps for your local supermarket.</p>
+            </div>
+        </div>
+
+        <div class="benefits-pill-grid">
+            <div class="benefit-pill"><span class="bp-icon" aria-hidden="true">⚡</span><strong>Save time</strong><span>No more label hunting</span></div>
+            <div class="benefit-pill"><span class="bp-icon" aria-hidden="true">✅</span><strong>Better choices</strong><span>Backed by clear data</span></div>
+            <div class="benefit-pill"><span class="bp-icon" aria-hidden="true">🥗</span><strong>Eat better</strong><span>Balanced and varied</span></div>
+            <div class="benefit-pill"><span class="bp-icon" aria-hidden="true">🌍</span><strong>Lower impact</strong><span>Reduce your footprint</span></div>
+            <div class="benefit-pill"><span class="bp-icon" aria-hidden="true">💡</span><strong>Clear advice</strong><span>Personal and transparent</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ PRODUCT DETAIL DEMO ═══════════ -->
+<section class="product-demo" id="features">
+    <div class="section-inner">
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <span class="section-label">Product Transparency</span>
+            <h2 class="section-title">Tap any product. See the full story.</h2>
+            <p class="section-subtitle mx-auto">Every score is backed by data, not opinion. Tap a product to see its breakdown, supplier, certifications and a better alternative when available.</p>
+        </div>
+        <div class="demo-layout">
+            <div class="demo-left">
+                <h3>Transparency built into every scan</h3>
+                <p>When users tap a product, they do not just see a letter, they see <strong>why</strong>. The breakdown shows CO₂ impact, packaging, transport, certifications and ingredients, plus full supplier information and the data source behind every claim.</p>
+                <div class="demo-cta">👇 Click a product to see the live detail view</div>
+                <div class="product-grid" id="productGrid">
+                    <button class="product-card active" data-product="0" aria-label="Tony's Chocolonely product">
+                        <div class="pc-img" aria-hidden="true">🍫</div>
+                        <div class="pc-info">
+                            <strong>Tony's Chocolonely</strong>
+                            <small>Dark 70% · 180g</small>
+                        </div>
+                        <div class="pc-score score-A">A</div>
+                    </button>
+                    <button class="product-card" data-product="1" aria-label="Oatly Oat Drink product">
+                        <div class="pc-img" aria-hidden="true">🥛</div>
+                        <div class="pc-info">
+                            <strong>Oatly Oat Drink</strong>
+                            <small>Barista · 1L</small>
+                        </div>
+                        <div class="pc-score score-A">A</div>
+                    </button>
+                    <button class="product-card" data-product="2" aria-label="Albert Heijn Bio Eggs product">
+                        <div class="pc-img" aria-hidden="true">🥚</div>
+                        <div class="pc-info">
+                            <strong>AH Bio Eggs</strong>
+                            <small>Free range · 6pc</small>
+                        </div>
+                        <div class="pc-score score-B">B</div>
+                    </button>
+                    <button class="product-card" data-product="3" aria-label="Imported Avocado product">
+                        <div class="pc-img" aria-hidden="true">🥑</div>
+                        <div class="pc-info">
+                            <strong>Imported Avocado</strong>
+                            <small>Peru · per piece</small>
+                        </div>
+                        <div class="pc-score score-D">D</div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="demo-detail" id="demoDetail" role="region" aria-live="polite" aria-label="Product detail"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ AI MEAL PLANNER ═══════════ -->
+<section class="meal-section" id="meal-planner">
+    <div class="section-inner">
+        <div class="text-center" style="margin-bottom: 3rem;">
+            <span class="section-label">AI Meal Planner</span>
+            <h2 class="section-title">Personal meal plans that do not repeat themselves</h2>
+            <p class="section-subtitle mx-auto">Our AI builds a fresh, balanced and sustainable week of meals. It adapts to your preferences, what you have already eaten and what your body needs across the week.</p>
+        </div>
+        <div class="meal-layout">
+            <div class="meal-text">
+                <h3>One AI. Three things it gets right.</h3>
+                <p>The meal planner is built around three principles that make sustainable eating realistic for everyday life.</p>
+
+                <div class="meal-badges">
+                    <span class="meal-badge">🚫 No repeat meals (14 days)</span>
+                    <span class="meal-badge">⚖️ Balanced nutrition</span>
+                    <span class="meal-badge">🌱 Lower CO₂ impact</span>
+                </div>
+
+                <ul class="meal-points">
+                    <li><span class="mp-icon">✓</span><div><strong>Variety, not repetition.</strong> The AI tracks a rolling 14-day meal history and avoids serving you the same dishes within that window, so you discover new recipes instead of cooking the same pasta every week.</div></li>
+                    <li><span class="mp-icon">✓</span><div><strong>Balanced across the week.</strong> Plans aim for variety in proteins, fibre, vegetables, carbs, healthy fats, vitamins and minerals, distributed across days rather than crammed into one meal.</div></li>
+                    <li><span class="mp-icon">✓</span><div><strong>Personalised to you.</strong> The AI learns from your sustainability preferences, dietary needs, allergies, budget, household size and shopping behaviour.</div></li>
+                    <li><span class="mp-icon">✓</span><div><strong>Sustainable by default.</strong> Recipes prioritise seasonal produce, lower-impact proteins and ingredients with strong sustainability scores.</div></li>
+                </ul>
+
+                <div class="meal-disclaimer">
+                    <strong>⚠ Note:</strong> EcoScan &amp; Plan provides general nutritional and sustainability guidance only. It does not replace professional medical or dietary advice.
+                </div>
+            </div>
+
+            <div class="week-plan" aria-label="Weekly meal plan preview">
+                <div class="week-head">
+                    <h4>🍽️ Your week, planned</h4>
+                    <span class="week-co2" title="Internal estimate based on sample plant-based week vs. average Dutch diet">−42% CO₂ vs. avg*</span>
+                </div>
+                <div class="week-days" id="weekDays">
+                    <div class="week-day" data-day="0"><span class="wd-name">Mon</span><span class="wd-emoji">🍝</span><span class="wd-score">A</span></div>
+                    <div class="week-day active" data-day="1"><span class="wd-name">Tue</span><span class="wd-emoji">🥗</span><span class="wd-score">A+</span></div>
+                    <div class="week-day" data-day="2"><span class="wd-name">Wed</span><span class="wd-emoji">🍲</span><span class="wd-score">B+</span></div>
+                    <div class="week-day" data-day="3"><span class="wd-name">Thu</span><span class="wd-emoji">🌯</span><span class="wd-score">A</span></div>
+                    <div class="week-day" data-day="4"><span class="wd-name">Fri</span><span class="wd-emoji">🍛</span><span class="wd-score">A</span></div>
+                    <div class="week-day" data-day="5"><span class="wd-name">Sat</span><span class="wd-emoji">🥘</span><span class="wd-score">B</span></div>
+                    <div class="week-day" data-day="6"><span class="wd-name">Sun</span><span class="wd-emoji">🍜</span><span class="wd-score">A+</span></div>
+                </div>
+                <div class="week-meal" id="weekMeal">
+                    <div class="wm-emoji" aria-hidden="true">🥗</div>
+                    <div class="wm-info">
+                        <strong>Mediterranean Chickpea Bowl</strong>
+                        <small>25 min · 480 kcal · Plant-based</small>
+                        <div class="wm-tags">
+                            <span class="wm-tag">Seasonal</span>
+                            <span class="wm-tag">Local produce</span>
+                            <span class="wm-tag">High fibre</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="nutrition-bars" aria-label="Weekly nutrition balance">
+                    <h5>Weekly nutrition balance</h5>
+                    <div class="nb-row"><span>Protein</span><div class="nb-bar"><div class="nb-fill" style="width: 88%"></div></div><span class="nb-val">88%</span></div>
+                    <div class="nb-row"><span>Fibre</span><div class="nb-bar"><div class="nb-fill" style="width: 92%"></div></div><span class="nb-val">92%</span></div>
+                    <div class="nb-row"><span>Vegetables</span><div class="nb-bar"><div class="nb-fill" style="width: 95%"></div></div><span class="nb-val">95%</span></div>
+                    <div class="nb-row"><span>Healthy fats</span><div class="nb-bar"><div class="nb-fill" style="width: 78%"></div></div><span class="nb-val">78%</span></div>
+                </div>
+                <p style="margin-top:.85rem; font-size:.75rem; color: var(--gray-500); font-style: italic;">* Indicative estimate based on a sample plant-forward week compared to the average Dutch diet, using public life-cycle data such as Poore &amp; Nemecek (Our World in Data). Actual savings depend on individual choices.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ COMPETITOR COMPARISON ═══════════ -->
+<section class="compare" id="compare">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Why we are different</span>
+            <h2 class="section-title">How EcoScan &amp; Plan compares</h2>
+            <p class="section-subtitle mx-auto">There are health-focused scan apps and supermarket loyalty apps, but no widely used tool combines AI-driven sustainability scoring with personalised meal planning and a smart shopping list. That is the gap we fill.</p>
+        </div>
+        <div class="compare-table-wrap">
+            <table class="compare-table" aria-label="Competitor comparison">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Yuka-style scan apps</th>
+                        <th>Supermarket apps (AH, Jumbo)</th>
+                        <th>Recipe / meal apps</th>
+                        <th class="us">EcoScan &amp; Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Product sustainability score</td><td><span class="tick">✓</span> health focus</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td class="us"><span class="tick">✓</span> CO₂, transport, packaging</td></tr>
+                    <tr><td>Independent from supermarkets</td><td><span class="tick">✓</span></td><td><span class="cross">✗</span></td><td>partly</td><td class="us"><span class="tick">✓</span></td></tr>
+                    <tr><td>Personalised AI meal planning</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td>partly</td><td class="us"><span class="tick">✓</span></td></tr>
+                    <tr><td>Smart sustainable shopping list</td><td><span class="cross">✗</span></td><td>promotional</td><td>basic</td><td class="us"><span class="tick">✓</span></td></tr>
+                    <tr><td>Lower-impact alternatives at the shelf</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td class="us"><span class="tick">✓</span></td></tr>
+                    <tr><td>No paid influence on rankings</td><td><span class="tick">✓</span></td><td><span class="cross">✗</span></td><td>varies</td><td class="us"><span class="tick">✓</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="compare-note">
+            <strong>Why our combination is unique.</strong> Yuka and similar apps focus mainly on health, not climate impact. Supermarket apps optimise for promotions, not independent sustainability. Recipe apps focus on taste, not on the supermarket moment. EcoScan &amp; Plan is the only concept that brings AI-driven sustainability scoring, personal meal planning and a smart shopping list into one independent app for everyday grocery shopping.
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ DIGITAL TRANSFORMATION ═══════════ -->
+<section class="dt-section" id="why-it-matters">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Why this is digital transformation</span>
+            <h2 class="section-title">Five ways AI creates real value</h2>
+            <p class="section-subtitle mx-auto">EcoScan &amp; Plan does not just digitise an existing process. It changes the consumer's relationship with sustainability across every grocery moment.</p>
+        </div>
+        <div class="dt-grid">
+            <div class="dt-card"><div class="dt-card-icon" aria-hidden="true">⚡</div><h3>Speed and time</h3><p>Instant insight in store, instead of label reading and googling.</p></div>
+            <div class="dt-card"><div class="dt-card-icon" aria-hidden="true">🔓</div><h3>Access and convenience</h3><p>Sustainability becomes understandable for every shopper, not only experts.</p></div>
+            <div class="dt-card"><div class="dt-card-icon" aria-hidden="true">🎯</div><h3>Personalisation</h3><p>AI tailors meals, scores and alternatives to each user.</p></div>
+            <div class="dt-card"><div class="dt-card-icon" aria-hidden="true">✓</div><h3>Decision making</h3><p>Clear, comparable scores replace guesswork at the point of purchase.</p></div>
+            <div class="dt-card"><div class="dt-card-icon" aria-hidden="true">🔍</div><h3>Trust and transparency</h3><p>Every score has a breakdown, source and supplier behind it.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FINANCIAL OVERVIEW ═══════════ -->
+<section class="financial" id="financial">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">1 · Financial Overview · Year 1</span>
+            <h2 class="section-title">A realistic first-year financial plan</h2>
+            <p class="section-subtitle mx-auto">The numbers below describe what it costs to run EcoScan &amp; Plan in Year 1, where revenue comes from, the expected loss to be covered by seed funding, the break-even point and the total investment needed.</p>
+        </div>
+
+        <div class="fin-intro">
+            <p>Year 1 is a validation year. The main goal is not immediate profitability, but <strong>market validation, user growth and proof</strong> that consumers actually return to the app each week. The seed investment is sized to give us 12 months of operating runway, a product buffer and a small operational reserve, so we can fully focus on building the product and the first commercial partnerships.</p>
+        </div>
+
+        <!-- COSTS -->
+        <div class="fin-block">
+            <div class="fin-block-head">
+                <div class="fbh-icon" aria-hidden="true">💰</div>
+                <h3>Year 1 operating costs · €222,000</h3>
+            </div>
+            <div class="fin-block-body">
+                <div class="fin-overview">
+                    <div class="fin-stat"><span class="fin-num">€222K</span><span class="fin-label">Annual operating costs</span></div>
+                    <div class="fin-stat"><span class="fin-num">€18.5K</span><span class="fin-label">Monthly operating costs</span></div>
+                    <div class="fin-stat"><span class="fin-num">3 FTE</span><span class="fin-label">Core team (lean by design)</span></div>
+                    <div class="fin-stat"><span class="fin-num">6</span><span class="fin-label">Cost categories</span></div>
+                </div>
+                <div class="fin-table-wrap">
+                    <table class="fin-table" aria-label="Cost breakdown">
+                        <thead><tr><th>Cost category</th><th>Monthly</th><th>Annual</th><th>What it covers</th></tr></thead>
+                        <tbody>
+                            <tr><td>Development team (3 FTE)</td><td class="num">€9,000</td><td class="num">€108,000</td><td>App developer, product/operations manager and sustainability/data analyst.</td></tr>
+                            <tr><td>Cloud &amp; API infrastructure</td><td class="num">€2,500</td><td class="num">€30,000</td><td>Hosting, databases, barcode scanning, storage and technical maintenance.</td></tr>
+                            <tr><td>AI / ML costs</td><td class="num">€1,500</td><td class="num">€18,000</td><td>AI tools for product comparison, explanations, recommendations and meal planning.</td></tr>
+                            <tr><td>Data licensing &amp; partnerships</td><td class="num">€1,000</td><td class="num">€12,000</td><td>Access to product databases, sustainability labels and certification data.</td></tr>
+                            <tr><td>Marketing &amp; user acquisition</td><td class="num">€3,000</td><td class="num">€36,000</td><td>Social media campaigns, launch marketing and student campaigns.</td></tr>
+                            <tr><td>Legal, admin &amp; office</td><td class="num">€1,500</td><td class="num">€18,000</td><td>Accounting, contracts, privacy/GDPR support, company registration.</td></tr>
+                            <tr class="total"><td>Total operating costs</td><td class="num">€18,500</td><td class="num">€222,000</td><td>Estimated Year 1 operating costs.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="fin-note">All figures are Year 1 estimates from our internal business case, sized for an early-stage startup.</p>
+            </div>
+        </div>
+
+        <!-- REVENUE -->
+        <div class="fin-block">
+            <div class="fin-block-head">
+                <div class="fbh-icon" aria-hidden="true">📈</div>
+                <h3>Year 1 revenue · €68,864 (estimate)</h3>
+            </div>
+            <div class="fin-block-body">
+                <div class="fin-overview">
+                    <div class="fin-stat"><span class="fin-num">€68,864</span><span class="fin-label">Year 1 revenue (estimate)</span></div>
+                    <div class="fin-stat"><span class="fin-num">3,000</span><span class="fin-label">Active users (Y1 target)</span></div>
+                    <div class="fin-stat"><span class="fin-num">300</span><span class="fin-label">Paying premium users (10%)</span></div>
+                    <div class="fin-stat"><span class="fin-num">5</span><span class="fin-label">Revenue streams</span></div>
+                </div>
+                <div class="fin-table-wrap">
+                    <table class="fin-table" aria-label="Revenue projection">
+                        <thead><tr><th>Revenue stream</th><th>Assumption</th><th>Year 1</th></tr></thead>
+                        <tbody>
+                            <tr><td>Premium subscriptions</td><td>300 paying users × €3.99/month × 12 months (10% conversion)</td><td class="num">€14,364</td></tr>
+                            <tr><td>Ethical in-app advertising</td><td>Small number of non-food, non-supermarket sustainability advertisers</td><td class="num">€12,000</td></tr>
+                            <tr><td>B2B pilot contract</td><td>1 pilot with a retailer, municipality, school or company in H2</td><td class="num">€25,000</td></tr>
+                            <tr><td>Data insight reports</td><td>2 aggregated, anonymous sustainability trend reports × €5,000</td><td class="num">€10,000</td></tr>
+                            <tr><td>Education / company licenses</td><td>5 organizations × €1,500 (workshops or internal programs)</td><td class="num">€7,500</td></tr>
+                            <tr class="total"><td>Total Year 1 revenue</td><td>Estimate</td><td class="num">€68,864</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="fin-note">Revenue assumes a conservative 10% conversion from free to premium and one paid pilot in the second half of the year.</p>
+            </div>
+        </div>
+
+        <!-- TOTAL OVERVIEW -->
+        <div class="fin-block">
+            <div class="fin-block-head">
+                <div class="fbh-icon" aria-hidden="true">📊</div>
+                <h3>Year 1 result · expected loss of €153,136</h3>
+            </div>
+            <div class="fin-block-body">
+                <div class="fin-table-wrap">
+                    <table class="fin-table" aria-label="Year 1 total overview">
+                        <thead><tr><th>Category</th><th>Amount</th><th>Comment</th></tr></thead>
+                        <tbody>
+                            <tr><td>Total Year 1 revenue</td><td class="num">€68,864</td><td>From 5 revenue streams</td></tr>
+                            <tr><td>Total Year 1 operating costs</td><td class="num">€222,000</td><td>Team, infrastructure, AI, data, marketing, admin</td></tr>
+                            <tr class="negative total"><td>Estimated Year 1 result</td><td class="num">−€153,136</td><td>Covered by seed investment</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="fin-note">A first-year loss is normal for an early-stage digital startup. Year 1 focuses on product, users and the first commercial partnerships.</p>
+            </div>
+        </div>
+
+        <!-- BREAK-EVEN -->
+        <div class="fin-block">
+            <div class="fin-block-head">
+                <div class="fbh-icon" aria-hidden="true">🎯</div>
+                <h3>Break-even target · around 9,700 active users</h3>
+            </div>
+            <div class="fin-block-body">
+                <p>The business becomes more attractive as the number of active users grows. The app has relatively high fixed costs in the beginning, but because it is fully digital, it can scale without the same increase in costs per user.</p>
+                <div class="fin-table-wrap">
+                    <table class="fin-table" aria-label="Revenue per active user">
+                        <thead><tr><th>Source</th><th>Estimated value per active user / year</th></tr></thead>
+                        <tbody>
+                            <tr><td>Premium subscriptions, averaged across all users</td><td class="num">€4.79</td></tr>
+                            <tr><td>Ethical advertising</td><td class="num">€4.00</td></tr>
+                            <tr><td>B2B, data and licenses, averaged across users</td><td class="num">€14.17</td></tr>
+                            <tr class="total"><td>Estimated average revenue per active user</td><td class="num">€22.96</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="breakeven-card">
+                    <div>
+                        <div class="be-num">~9,700</div>
+                        <div class="be-label">Active users for break-even</div>
+                    </div>
+                    <p>With €222,000 in annual operating costs and an estimated €22.96 average revenue per active user, the company can move toward break-even at around 9,700 active users. We expect to reach this point in Year 2 or early Year 3, depending on how quickly the app gains users after launch.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- INVESTMENT NEEDED -->
+        <div class="fin-block">
+            <div class="fin-block-head">
+                <div class="fbh-icon" aria-hidden="true">🚀</div>
+                <h3>Investment needed · €285,000 seed round</h3>
+            </div>
+            <div class="fin-block-body">
+                <div class="invest-card">
+                    <div class="invest-main">
+                        <div class="invest-label">Seed round · Year 1</div>
+                        <div class="invest-amount">€285,000</div>
+                    </div>
+                    <div class="invest-explain">
+                        <p><strong>Why this amount?</strong> The seed round is higher than the expected Year 1 loss because EcoScan &amp; Plan needs enough room to validate the business model properly, improve the product after user testing and handle unexpected costs without stopping growth.</p>
+                        <div class="invest-breakdown-mini" aria-label="Seed investment breakdown">
+                            <div class="invest-mini"><strong>€222K</strong><span>Runway</span></div>
+                            <div class="invest-mini"><strong>€38K</strong><span>Product buffer</span></div>
+                            <div class="invest-mini"><strong>€25K</strong><span>Reserve</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="invest-allocation">
+                    <div class="invest-alloc-card">
+                        <div class="ia-num">€222K</div>
+                        <div class="ia-label">Operating runway</div>
+                        <div class="ia-desc">Covers 12 months of total operating costs: team, cloud, AI, data, marketing and admin.</div>
+                    </div>
+                    <div class="invest-alloc-card">
+                        <div class="ia-num">€38K</div>
+                        <div class="ia-label">Product development buffer</div>
+                        <div class="ia-desc">Reserved for app improvements, integrations, user testing and scaling infrastructure.</div>
+                    </div>
+                    <div class="invest-alloc-card">
+                        <div class="ia-num">€25K</div>
+                        <div class="ia-label">Operational reserve</div>
+                        <div class="ia-desc">Buffer for unexpected costs, extra partnerships, legal work or pilot projects.</div>
+                    </div>
+                </div>
+                <p class="fin-note">Initial business case. Year 1 figures are estimates and not definitive forecasts.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ BUSINESS MODEL ═══════════ -->
+<section class="bizmodel" id="business-model">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">2 · Business Model</span>
+            <h2 class="section-title">How EcoScan &amp; Plan earns money</h2>
+            <p class="section-subtitle mx-auto">EcoScan &amp; Plan uses a freemium model. Scanning products and seeing a sustainability score is always free, which builds an active user base. Revenue comes from premium features, ethical advertising and partnerships with organisations.</p>
+        </div>
+
+        <div class="bm-grid">
+            <div class="bm-card">
+                <div class="bm-icon-top" aria-hidden="true">⭐</div>
+                <h3>Premium subscriptions</h3>
+                <span class="bm-amount">€3.99 / month per user</span>
+                <p>Premium unlocks sustainable meal planning, smart shopping lists, personal filters (vegan, vegetarian, budget, local, allergies), scan history and sustainability progress tracking. Priced low enough for students, recurring enough to build predictable revenue.</p>
+            </div>
+            <div class="bm-card">
+                <div class="bm-icon-top" aria-hidden="true">📣</div>
+                <h3>Ethical in-app advertising</h3>
+                <span class="bm-amount">€12,000 / year (Y1 estimate)</span>
+                <p>Ads are shown outside scan results and only from brands that do not compete with scanned products: green energy, public transport, sustainable banks, repair and second-hand services, educational campaigns. Food brands and supermarkets cannot advertise in scan results.</p>
+            </div>
+            <div class="bm-card">
+                <div class="bm-icon-top" aria-hidden="true">🤝</div>
+                <h3>B2B pilot contracts</h3>
+                <span class="bm-amount">€25,000 per pilot</span>
+                <p>Retailers, municipalities, schools or companies can pay to test EcoScan &amp; Plan as a sustainability awareness tool. A pilot includes testing, insights, support, reporting and possible adaptation to the partner's needs.</p>
+            </div>
+            <div class="bm-card">
+                <div class="bm-icon-top" aria-hidden="true">📊</div>
+                <h3>Aggregated data insight reports</h3>
+                <span class="bm-amount">€5,000 per report</span>
+                <p>Anonymous and aggregated reports about consumer sustainability trends, product categories and shifting preferences. Individual user data is never sold and reports never contain identifiable information.</p>
+            </div>
+            <div class="bm-card">
+                <div class="bm-icon-top" aria-hidden="true">🎓</div>
+                <h3>Education &amp; company licenses</h3>
+                <span class="bm-amount">€1,500 per organisation</span>
+                <p>Affordable early access packages for schools, universities and small companies that want to use the app for workshops, education or internal sustainability programs. A low-friction way to onboard the first organisational partners.</p>
+            </div>
+            <div class="bm-card">
+                <div class="bm-icon-top" aria-hidden="true">🔄</div>
+                <h3>Diversified, scalable mix</h3>
+                <span class="bm-amount">5 streams</span>
+                <p>Revenue is split across five independent channels. This reduces dependency on any single source and gives investors exposure to both consumer-paid (subscriptions) and B2B-paid (pilots, reports, licenses) value capture.</p>
+            </div>
+        </div>
+
+        <div class="free-scans-card">
+            <div class="fs-icon" aria-hidden="true">🔓</div>
+            <div>
+                <h3>Why scans stay free, and why that protects the business</h3>
+                <p>We deliberately do not charge users per scan and we do not allow brands to pay for better visibility in scan results. If companies could pay to appear as recommended alternatives, users would see the app as a marketing tool rather than an independent sustainability guide. That would damage trust, which is one of the most valuable assets of the business.</p>
+                <div class="fs-rule">Scan results remain independent. Revenue is built around the platform, not by influencing product scores or recommendations.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ WHY INVEST ═══════════ -->
+<section class="invest-section" id="invest">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">3 · For Investors</span>
+            <h2 class="section-title">Why invest in EcoScan &amp; Plan</h2>
+            <p class="section-subtitle mx-auto">Our startup combines a clear and growing consumer problem with a scalable digital product and multiple revenue streams. Below is what makes this an attractive seed-stage opportunity.</p>
+        </div>
+
+        <div class="invest-reasons">
+            <div class="invest-reason">
+                <div class="ir-num">1</div>
+                <div>
+                    <h3>Scalable digital platform</h3>
+                    <p>Once the app is built, adding more users costs very little. Fixed costs stay relatively stable, so revenue can grow faster than costs after break-even. This creates a clear path to profitability once the user base scales.</p>
+                </div>
+            </div>
+            <div class="invest-reason">
+                <div class="ir-num">2</div>
+                <div>
+                    <h3>Diversified revenue streams</h3>
+                    <p>Revenue does not depend on a single source. Investors get exposure to five independent channels:</p>
+                    <ul>
+                        <li>Premium subscriptions (€3.99/month)</li>
+                        <li>Ethical in-app advertising</li>
+                        <li>B2B pilot contracts</li>
+                        <li>Aggregated data insight reports</li>
+                        <li>Education and company licenses</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="invest-reason">
+                <div class="ir-num">3</div>
+                <div>
+                    <h3>Early-mover in a growing market</h3>
+                    <p>The app targets the rapidly growing sustainability-conscious consumer segment. Sustainable consumption is moving from niche to mainstream, but trusted, independent digital tools are still limited. Early investors gain a position in a market where demand is increasing faster than supply.</p>
+                </div>
+            </div>
+            <div class="invest-reason">
+                <div class="ir-num">4</div>
+                <div>
+                    <h3>Trust as a competitive moat</h3>
+                    <p>We deliberately do not allow brands to pay for better product placement. This protects user trust, drives long-term engagement, and strengthens the brand. A trusted platform means higher subscription conversion, more engagement and lower churn, which lowers risk for investors.</p>
+                </div>
+            </div>
+            <div class="invest-reason">
+                <div class="ir-num">5</div>
+                <div>
+                    <h3>Measurable ESG impact</h3>
+                    <p>Investors are not only gaining financial returns, but also supporting a product that promotes sustainable consumer behaviour. EcoScan &amp; Plan generates both financial value and tangible environmental and social impact, which fits investors with an ESG mandate.</p>
+                </div>
+            </div>
+            <div class="invest-reason">
+                <div class="ir-num">6</div>
+                <div>
+                    <h3>Lean, balanced team</h3>
+                    <p>A multidisciplinary founding team covers strategy, product, business development, finance, marketing and legal. Year 1 runs on a deliberately small 3 FTE core team to keep costs manageable while the product is being validated.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="investor-perks">
+            <h3>What investors get</h3>
+            <table>
+                <tbody>
+                    <tr><td>Equity ownership</td><td>€285,000 seed investment at €1,500,000 pre-money valuation, which is approximately 16% ownership.</td></tr>
+                    <tr><td>Financial upside</td><td>Scalable model with multiple revenue streams. After reaching around 9,700 active users (break-even), profits can grow rapidly.</td></tr>
+                    <tr><td>Early access</td><td>Be part of a first-mover platform in sustainability tech, before the segment becomes crowded.</td></tr>
+                    <tr><td>Diversified exposure</td><td>Returns are driven by a mix of subscriptions, advertising, B2B pilots, data reports and education licenses.</td></tr>
+                    <tr><td>Credibility and trust</td><td>An independent scoring approach protects user loyalty and supports long-term value.</td></tr>
+                    <tr><td>ESG impact</td><td>Contributes to measurable, positive impact on sustainable consumer behaviour.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="key-numbers">
+            <h3>Key investment numbers at a glance</h3>
+            <table>
+                <thead><tr><th>Metric</th><th>Value</th><th>Explanation</th></tr></thead>
+                <tbody>
+                    <tr><td>Active users</td><td>3,000</td><td>Year 1 target for initial market validation</td></tr>
+                    <tr><td>Paying subscribers</td><td>300</td><td>10% of users converting to premium</td></tr>
+                    <tr><td>Revenue</td><td>€68,864</td><td>From subscriptions, advertising, B2B pilots, reports and licenses</td></tr>
+                    <tr><td>Operating costs</td><td>€222,000</td><td>Team, infrastructure, AI, data, marketing, legal/admin</td></tr>
+                    <tr><td>Year 1 result</td><td>−€153,136</td><td>Loss covered by seed funding</td></tr>
+                    <tr><td>Break-even target</td><td>~9,700 active users</td><td>Expected in Year 2 or early Year 3</td></tr>
+                    <tr><td>Funding needed</td><td>€285,000</td><td>Seed investment to cover Year 1 operations and buffer</td></tr>
+                    <tr><td>Investor equity example</td><td>~16%</td><td>Based on €1,500,000 pre-money valuation</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ OPERATIONS ═══════════ -->
+<section id="operations">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Operations &amp; Systems</span>
+            <h2 class="section-title">What it takes to run EcoScan &amp; Plan</h2>
+            <p class="section-subtitle mx-auto">A lean operating setup focused on shipping quickly and learning from real users, supported by a tight stack of tools.</p>
+        </div>
+        <div class="ops-grid">
+            <div class="ops-card">
+                <h3><span class="ops-icon" aria-hidden="true">👥</span> People &amp; functions</h3>
+                <ul class="ops-list">
+                    <li><span class="ops-bullet">1</span><div><strong>App developer / technical lead (1 FTE)</strong><small>Builds and maintains the app, scan system, database and technical infrastructure.</small></div></li>
+                    <li><span class="ops-bullet">2</span><div><strong>Product &amp; operations manager (1 FTE)</strong><small>Manages product development, user feedback, partnerships, planning and daily operations.</small></div></li>
+                    <li><span class="ops-bullet">3</span><div><strong>Sustainability / data analyst (1 FTE)</strong><small>Checks sustainability data, product scores, labels and the quality of explanations.</small></div></li>
+                    <li><span class="ops-bullet">4</span><div><strong>Marketing, finance &amp; legal support</strong><small>Covered by the founding team and external partners during Year 1 to keep fixed costs low.</small></div></li>
+                </ul>
+            </div>
+            <div class="ops-card">
+                <h3><span class="ops-icon" aria-hidden="true">🔧</span> Systems &amp; tooling</h3>
+                <ul class="ops-list">
+                    <li><span class="ops-bullet">✓</span><div><strong>Website &amp; platform builder</strong><small>For the public site and onboarding flows.</small></div></li>
+                    <li><span class="ops-bullet">✓</span><div><strong>CRM / customer system</strong><small>Manages user accounts, partners and feedback loops.</small></div></li>
+                    <li><span class="ops-bullet">✓</span><div><strong>Analytics dashboard</strong><small>Tracks engagement, scan behaviour and feature usage in real time.</small></div></li>
+                    <li><span class="ops-bullet">✓</span><div><strong>GenAI tooling (Claude AI and similar)</strong><small>Used for content, recommendations and meal plan generation.</small></div></li>
+                    <li><span class="ops-bullet">✓</span><div><strong>Payment &amp; accounting system</strong><small>Used for premium subscriptions, B2B contracts and partner invoicing.</small></div></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ LEGAL & ETHICS ═══════════ -->
+<section class="legal" id="legal">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Legal · Ethics · Privacy</span>
+            <h2 class="section-title">Ethics and legal, built into the product</h2>
+            <p class="section-subtitle mx-auto">EcoScan &amp; Plan handles sustainability, personalisation and AI responsibly. The product is designed around consent, privacy-by-design, secure infrastructure, transparent scoring and clear user control.</p>
+        </div>
+
+        <div class="legal-summary-grid" aria-label="Legal and ethical safeguards summary">
+            <div class="legal-summary-card">
+                <div class="lsc-icon" aria-hidden="true">🔐</div>
+                <h3>Consent first</h3>
+                <p>Behavioural data, dietary preferences, allergies and personalisation are only processed with clear user consent.</p>
+            </div>
+            <div class="legal-summary-card">
+                <div class="lsc-icon" aria-hidden="true">🛡️</div>
+                <h3>Secure by design</h3>
+                <p>Encryption, MFA, access control and breach procedures are part of the operating model from day one.</p>
+            </div>
+            <div class="legal-summary-card">
+                <div class="lsc-icon" aria-hidden="true">🤖</div>
+                <h3>Responsible AI</h3>
+                <p>AI recommendations are transparent, adjustable by users and checked for bias and unreliable data.</p>
+            </div>
+            <div class="legal-summary-card">
+                <div class="lsc-icon" aria-hidden="true">🌿</div>
+                <h3>No greenwashing</h3>
+                <p>Scores are based on verifiable datasets. Brands cannot buy better scores or influence the standard ranking.</p>
+            </div>
+        </div>
+
+        <div class="legal-intro">
+            <p><strong>Ethical principles.</strong> EcoScan &amp; Plan uses technology to support better consumer decisions, not to manipulate them. The user remains in control: dietary priorities can be adjusted manually, products with insufficient data are labelled clearly and AI-generated recommendations are explained transparently.</p>
+            <p><strong>Legal position.</strong> The product follows GDPR principles, including data minimisation, privacy-by-design, transparency and user rights. For sensitive data such as allergies or dietary information, explicit consent is required. Aggregated analytics are separated from individual user profiles and identifiable personal data is never sold.</p>
+            <div class="legal-chip-row" aria-label="Key legal frameworks">
+                <span class="legal-chip">GDPR</span>
+                <span class="legal-chip">ePrivacy Directive</span>
+                <span class="legal-chip">EU AI Act transparency</span>
+                <span class="legal-chip">Unfair Commercial Practices Directive</span>
+                <span class="legal-chip">Green Claims principles</span>
+                <span class="legal-chip">CSRD-aligned transparency</span>
+            </div>
+        </div>
+
+        <div class="privacy-statement" id="privacy">
+            <h3><span class="ps-icon" aria-hidden="true">🔐</span> Privacy &amp; data statement</h3>
+            <p>Your data is yours. EcoScan &amp; Plan only collects what is needed to make the product work, keeps sensitive information secure and gives users direct control over their data inside the app.</p>
+            <ul>
+                <li>Scan history is anonymised after 14 days and only retained for the rolling window needed by the meal algorithm</li>
+                <li>Separate consent choices for personalisation, score improvement analytics and B2B insights</li>
+                <li>Users can access, export and permanently delete their data in the app settings</li>
+                <li>Dietary preferences, allergies and health-related information require explicit consent</li>
+                <li>B2B insights are aggregated and anonymised, never traceable to individual users</li>
+                <li>No identifiable personal data is sold to third parties</li>
+                <li>Tracking cookies are only used after active opt-in</li>
+                <li>Data Processing Agreements are signed with all cloud and data partners</li>
+            </ul>
+        </div>
+
+        <div class="legal-matrix" aria-label="Legal and ethical risk overview">
+            <h3>Legal &amp; ethics overview</h3>
+            <table>
+                <thead><tr><th>Area</th><th>Main risk</th><th>How we reduce it</th></tr></thead>
+                <tbody>
+                    <tr><td>Privacy</td><td>Personal and behavioural data could be misused or stored too long.</td><td>Explicit consent, 14-day anonymisation, direct export/delete controls and purpose-specific opt-ins.</td></tr>
+                    <tr><td>Security</td><td>Dietary and scan data could be exposed through a breach.</td><td>AES-256 encryption, TLS 1.3, MFA, role-based access, monitoring and a documented incident response plan.</td></tr>
+                    <tr><td>AI fairness</td><td>Recommendations could favour certain brands, diets or cuisines.</td><td>Audited data sources, bi-annual bias reviews, insufficient-data labels and user-adjustable priorities.</td></tr>
+                    <tr><td>Green claims</td><td>Incorrect scores or paid influence could become misleading.</td><td>Public scoring methodology, no paid ranking influence, external verification and clearly labelled sponsored content.</td></tr>
+                    <tr><td>AI footprint</td><td>A sustainability app can undermine its mission by using heavy AI inefficiently.</td><td>Smallest suitable models, batching, caching, renewable-energy cloud regions and footprint reporting.</td></tr>
+                    <tr><td>B2B data</td><td>Retail insights could reveal individual user behaviour.</td><td>Aggregated, anonymised insight reports only; no traceable user-level sharing.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center" style="margin-bottom: 1.5rem;">
+            <span class="section-label">Identified risks</span>
+            <h3 style="font-size:1.3rem; font-weight:800; color: var(--gray-900); margin: .5rem 0 .5rem;">Risks &amp; concrete control measures</h3>
+            <p style="font-size:.95rem; color: var(--gray-600); max-width: 660px; margin: 0 auto;">Click any risk to see the concrete measures we take to reduce it. Each risk includes the practical controls and relevant legal basis.</p>
+        </div>
+
+        <div class="risk-grid" id="riskGrid">
+
+            <div class="risk-card">
+                <button class="risk-head" aria-expanded="false">
+                    <div class="rh-left">
+                        <div class="rh-icon" aria-hidden="true">🔒</div>
+                        <div>
+                            <span class="rh-cat">Legal · Privacy</span>
+                            <strong>GDPR and privacy of personal data</strong>
+                        </div>
+                    </div>
+                    <div class="rh-arrow" aria-hidden="true">▾</div>
+                </button>
+                <div class="risk-body">
+                    <div class="risk-body-inner">
+                        <p>EcoScan &amp; Plan processes sensitive information such as scan behaviour, dietary preferences, allergies and location data. This requires strict consent, data minimisation and transparency.</p>
+                        <h6>Control measures</h6>
+                        <ul>
+                            <li>Scan history is anonymised after 14 days</li>
+                            <li>Explicit consent for behavioural and personalisation data</li>
+                            <li>Additional explicit consent for allergies and health-related information</li>
+                            <li>Aggregated product-improvement analytics only where users cannot be identified</li>
+                            <li>DPIA before every high-impact feature goes live</li>
+                            <li>Cookie banner with active opt-in for tracking cookies</li>
+                        </ul>
+                        <div class="legal-basis"><strong>Legal basis:</strong> GDPR art. 5, 6, 9, 13, 25 and 35; ePrivacy Directive for tracking cookies.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <button class="risk-head" aria-expanded="false">
+                    <div class="rh-left">
+                        <div class="rh-icon" aria-hidden="true">🛡️</div>
+                        <div>
+                            <span class="rh-cat">Legal · Security</span>
+                            <strong>Data breaches and cyberattacks</strong>
+                        </div>
+                    </div>
+                    <div class="rh-arrow" aria-hidden="true">▾</div>
+                </button>
+                <div class="risk-body">
+                    <div class="risk-body-inner">
+                        <p>A breach involving dietary data or scan behaviour could damage trust and trigger mandatory notification to the supervisory authority within 72 hours where legally required.</p>
+                        <h6>Control measures</h6>
+                        <ul>
+                            <li>AES-256 encryption at rest and TLS 1.3 encryption in transit</li>
+                            <li>MFA for all admin and developer accounts; optional 2FA for users</li>
+                            <li>Annual independent penetration testing before major releases</li>
+                            <li>Role-based access control for staff and partners</li>
+                            <li>Automated monitoring for suspicious logins and API behaviour</li>
+                            <li>Incident response plan with internal escalation within 24 hours</li>
+                        </ul>
+                        <div class="legal-basis"><strong>Legal basis:</strong> GDPR art. 32 for technical and organisational measures; GDPR art. 33 for breach notification.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <button class="risk-head" aria-expanded="false">
+                    <div class="rh-left">
+                        <div class="rh-icon" aria-hidden="true">🤖</div>
+                        <div>
+                            <span class="rh-cat">Ethical · AI</span>
+                            <strong>Unreliable or biased AI recommendations</strong>
+                        </div>
+                    </div>
+                    <div class="rh-arrow" aria-hidden="true">▾</div>
+                </button>
+                <div class="risk-body">
+                    <div class="risk-body-inner">
+                        <p>The scoring model and meal planner could unintentionally favour certain brands, diets, cuisines or expensive ingredients. That would damage trust and fairness.</p>
+                        <h6>Control measures</h6>
+                        <ul>
+                            <li>Scores are built on audited open databases such as Open Food Facts and Agribalyse</li>
+                            <li>No brand-supplied ranking influence in the standard score</li>
+                            <li>Bi-annual bias reviews for cultural, budget and diet-related bias</li>
+                            <li>Products without reliable sustainability data receive an “insufficient data” label</li>
+                            <li>Users can manually adjust priorities instead of relying only on automation</li>
+                            <li>AI-generated recommendations are disclosed clearly to users</li>
+                        </ul>
+                        <div class="legal-basis"><strong>Legal basis:</strong> EU AI Act art. 50 transparency obligations; GDPR art. 22 may become relevant for significant fully automated decisions.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <button class="risk-head" aria-expanded="false">
+                    <div class="rh-left">
+                        <div class="rh-icon" aria-hidden="true">🌿</div>
+                        <div>
+                            <span class="rh-cat">Ethical · Sustainability</span>
+                            <strong>Inaccurate scores and greenwashing</strong>
+                        </div>
+                    </div>
+                    <div class="rh-arrow" aria-hidden="true">▾</div>
+                </button>
+                <div class="risk-body">
+                    <div class="risk-body-inner">
+                        <p>Incorrect sustainability scores or paid ranking influence would mislead users and undermine the core promise of the app.</p>
+                        <h6>Control measures</h6>
+                        <ul>
+                            <li>Public scoring methodology with data sources and weighting factors</li>
+                            <li>CO₂, packaging, transport and certification factors are shown in the score breakdown</li>
+                            <li>Brands cannot pay for higher scores or better standard ranking visibility</li>
+                            <li>Sponsored content is clearly labelled when shown</li>
+                            <li>Annual external verification by an independent sustainability organisation</li>
+                            <li>Historical score changes are logged when methods or datasets change</li>
+                        </ul>
+                        <div class="legal-basis"><strong>Legal basis:</strong> Unfair Commercial Practices Directive 2005/29/EC and proposed EU Green Claims Directive 2023/0085.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <button class="risk-head" aria-expanded="false">
+                    <div class="rh-left">
+                        <div class="rh-icon" aria-hidden="true">⚡</div>
+                        <div>
+                            <span class="rh-cat">Sustainability · AI footprint</span>
+                            <strong>Environmental footprint of AI itself</strong>
+                        </div>
+                    </div>
+                    <div class="rh-arrow" aria-hidden="true">▾</div>
+                </button>
+                <div class="risk-body">
+                    <div class="risk-body-inner">
+                        <p>A sustainability app should not undermine its own mission through unnecessary AI compute, storage or energy use.</p>
+                        <h6>Control measures</h6>
+                        <ul>
+                            <li>Use the smallest AI model suitable for each task</li>
+                            <li>Use lightweight classification for scans and larger models only when needed for meal planning</li>
+                            <li>Batch and cache AI calls; re-score scanned products at most once per day</li>
+                            <li>Host in cloud regions powered largely by renewable energy</li>
+                            <li>Publish quarterly estimated CO₂ per 1,000 API calls</li>
+                            <li>Delete unused datasets and redundant AI logs automatically</li>
+                        </ul>
+                        <div class="legal-basis"><strong>Legal basis:</strong> No direct current obligation, but the approach aligns with broader CSRD sustainability transparency principles.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-card">
+                <button class="risk-head" aria-expanded="false">
+                    <div class="rh-left">
+                        <div class="rh-icon" aria-hidden="true">📊</div>
+                        <div>
+                            <span class="rh-cat">Ethical · Behavioural data</span>
+                            <strong>Privacy of behavioural and preference data</strong>
+                        </div>
+                    </div>
+                    <div class="rh-arrow" aria-hidden="true">▾</div>
+                </button>
+                <div class="risk-body">
+                    <div class="risk-body-inner">
+                        <p>Scan behaviour, sustainability preferences and dietary patterns become highly sensitive when combined. They must never be used in ways users did not agree to.</p>
+                        <h6>Control measures</h6>
+                        <ul>
+                            <li>Separate opt-in or opt-out controls for each processing purpose</li>
+                            <li>Personalisation, score improvement analytics and B2B insights are separated</li>
+                            <li>Retail-partner data is aggregated and anonymised only</li>
+                            <li>Users can view, export and permanently delete their data</li>
+                            <li>Behavioural analytics are pseudonymised wherever possible</li>
+                            <li>Recommendation logic is explained clearly to users</li>
+                        </ul>
+                        <div class="legal-basis"><strong>Legal basis:</strong> GDPR art. 17 right to erasure, art. 20 data portability and art. 21 right to object.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ TRUST COMMITMENT ═══════════ -->
+<section class="trust">
+    <div class="section-inner">
+        <div class="trust-card">
+            <span class="trust-label">Our commitment to trust</span>
+            <h2>Sustainability scores belong to users, not to brands.</h2>
+            <p style="opacity:.92; font-size:1.05rem; max-width:680px;">EcoScan &amp; Plan is built on a simple rule: the score in the app is the score. No brand can pay for a better one.</p>
+            <div class="trust-grid">
+                <div class="trust-item"><div class="ti-check" aria-hidden="true">✓</div><p>Sustainability scores stay independent and cannot be influenced by brands.</p></div>
+                <div class="trust-item"><div class="ti-check" aria-hidden="true">✓</div><p>Product rankings are based on objective data and AI analysis.</p></div>
+                <div class="trust-item"><div class="ti-check" aria-hidden="true">✓</div><p>Partnerships do not affect recommendations.</p></div>
+                <div class="trust-item"><div class="ti-check" aria-hidden="true">✓</div><p>Sponsored content is always clearly labelled as such.</p></div>
+                <div class="trust-item"><div class="ti-check" aria-hidden="true">✓</div><p>Brands cannot pay for better scores or better visibility.</p></div>
+                <div class="trust-item"><div class="ti-check" aria-hidden="true">✓</div><p>This protects transparency and helps prevent greenwashing.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ DATA DISCLOSURE & SOURCES ═══════════ -->
+<section class="data-section">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">Data Transparency</span>
+            <h2 class="section-title">What data we use, why, and where it comes from</h2>
+            <p class="section-subtitle mx-auto">We only collect what improves the product for users, and we are explicit about which external data sources sit behind our sustainability scores.</p>
+        </div>
+        <div class="data-grid">
+            <div class="data-card">
+                <h3><span class="data-icon" aria-hidden="true">📥</span> Data we use</h3>
+                <p>The data we process to make EcoScan &amp; Plan work for each user:</p>
+                <ul class="data-list">
+                    <li>Shopping behaviour (scans, frequency, categories)</li>
+                    <li>Sustainability preferences (for example CO₂ priority, packaging)</li>
+                    <li>Usage data (sessions, features used)</li>
+                    <li>Product and meal data (saved items, plans)</li>
+                    <li>User accounts and feedback</li>
+                    <li>Payment data, only for premium subscriptions and B2B contracts</li>
+                </ul>
+            </div>
+            <div class="data-card">
+                <h3><span class="data-icon" aria-hidden="true">🎯</span> Why we use it</h3>
+                <p>Every data point exists to improve the user experience, not to be sold:</p>
+                <ul class="data-list">
+                    <li>Improve personal recommendations</li>
+                    <li>Build better, more varied meal plans</li>
+                    <li>Make sustainability scores more accurate over time</li>
+                    <li>Generate smarter, more relevant shopping lists</li>
+                    <li>Improve the product based on real-world feedback</li>
+                    <li>Generate aggregated, privacy-safe insights for partners, never identifiable personal data</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 2rem; margin-bottom: 1.25rem;">
+            <span class="section-label">External Data Sources</span>
+            <h3 style="font-size:1.3rem; font-weight:800; color: var(--gray-900); margin-top: .5rem;">Where our sustainability scores come from</h3>
+            <p style="font-size:.95rem; color: var(--gray-600); max-width: 680px; margin: .5rem auto 0;">Scores are built from a mix of public databases, retailer information and life-cycle data, combined into a single readable letter score in the app.</p>
+        </div>
+
+        <div class="sources-grid">
+            <div class="source-card">
+                <div class="src-icon" aria-hidden="true">🗂️</div>
+                <strong>Open Food Facts</strong>
+                <small>Open product database for ingredients, packaging and labels.</small>
+            </div>
+            <div class="source-card">
+                <div class="src-icon" aria-hidden="true">🌍</div>
+                <strong>Life-cycle &amp; CO₂ datasets</strong>
+                <small>Public life-cycle assessment data such as Poore &amp; Nemecek (Our World in Data) for emissions per product category.</small>
+            </div>
+            <div class="source-card">
+                <div class="src-icon" aria-hidden="true">🛒</div>
+                <strong>Retailer &amp; product APIs</strong>
+                <small>Connections to supermarket and brand product feeds for assortment, packaging and origin data.</small>
+            </div>
+            <div class="source-card">
+                <div class="src-icon" aria-hidden="true">🏷️</div>
+                <strong>Certification &amp; labels</strong>
+                <small>EU Organic, Fair Trade, B-Corp, MSC, FSC and other recognised sustainability certifications.</small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ ABOUT / TEAM ═══════════ -->
+<section class="team" id="about">
+    <div class="section-inner">
+        <div class="text-center">
+            <span class="section-label">About · The Team</span>
+            <h2 class="section-title">A multidisciplinary founding team</h2>
+            <p class="section-subtitle mx-auto">EcoScan &amp; Plan was developed within Digital Business and Transformation. Each role contributes a different lens to make the concept investor-ready.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar" aria-hidden="true">NB</div>
+                <h3>Niels van Beets</h3>
+                <span class="role">CEO</span>
+                <p class="desc">Strategic digital transformation opportunity and overall vision.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" aria-hidden="true">SH</div>
+                <h3>Sven Hagels</h3>
+                <span class="role">Product</span>
+                <p class="desc">MVP definition and the digital capabilities that make it valuable.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" aria-hidden="true">HL</div>
+                <h3>Hester van Leur</h3>
+                <span class="role">Business Development</span>
+                <p class="desc">First customer segment and reachable partnerships.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" aria-hidden="true">IE</div>
+                <h3>Iris Ensink</h3>
+                <span class="role">Finance</span>
+                <p class="desc">Value capture, financial feasibility and the investor case.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" aria-hidden="true">MK</div>
+                <h3>Merle Kamerling</h3>
+                <span class="role">Marketing</span>
+                <p class="desc">Value proposition and the way it is communicated on the website.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar" aria-hidden="true">MB</div>
+                <h3>Matthijs de Bruijn</h3>
+                <span class="role">Legal &amp; Ethics</span>
+                <p class="desc">Privacy, data reliability and responsible innovation.</p>
+            </div>
+        </div>
+        <p class="team-credit">Concept developed within <strong>Digital Business and Transformation</strong> · Group 19 · University of Groningen.</p>
+    </div>
+</section>
+
+<!-- ═══════════ GENAI REFLECTION ═══════════ -->
+<section class="genai">
+    <div class="section-inner">
+        <div class="genai-card">
+            <div class="genai-icon-wrap" aria-hidden="true">🤖</div>
+            <div class="genai-text">
+                <h3>How we used GenAI to build this</h3>
+                <p>GenAI helped us explore strategy ideas, app features, copy, design directions, financial scenarios and risk identification. Human judgement remained essential where it mattered most:</p>
+                <ul>
+                    <li>Final decisions required human judgement</li>
+                    <li>App features needed sharper alignment with the real user problem</li>
+                    <li>Website copy needed to be specific to our brand, not generic</li>
+                    <li>Financial estimates were verified and challenged</li>
+                    <li>Ethics and AI risks always required human review</li>
+                    <li>Sustainability claims were checked against public data sources</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta" id="cta">
+    <div class="section-inner cta-inner">
+        <h2>Start your sustainable journey today.</h2>
+        <p>Scan. Plan. Shop. Repeat. Join people making a real difference, one scan at a time.</p>
+        <div class="cta-buttons">
+            <a href="#" class="store-badge" aria-label="Download on the App Store">
+                <span style="font-size:1.5rem;" aria-hidden="true">🍎</span>
+                <div class="store-text">
+                    <small>Download on the</small>
+                    <span>App Store</span>
+                </div>
+            </a>
+            <a href="#" class="store-badge" aria-label="Get it on Google Play">
+                <span style="font-size:1.5rem;" aria-hidden="true">▶</span>
+                <div class="store-text">
+                    <small>Get it on</small>
+                    <span>Google Play</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+    <span class="logo-footer">☘ EcoScan &amp; Plan</span>
+    <p>Scan. Plan. Shop sustainable.</p>
+    <p class="footer-credit">Group 19 · Digital Business and Transformation · University of Groningen · 2025-2026</p>
+</footer>
+
+<script>
+/* ── PRODUCT DETAIL DEMO ── */
+const productData = [
+    {
+        name: "Tony's Chocolonely",
+        sub: "Dark 70% · 180g",
+        emoji: "🍫",
+        score: "A",
+        scoreClass: "score-A",
+        scoreNum: "92/100",
+        breakdown: [
+            { label: "CO₂ impact", val: "Low" },
+            { label: "Packaging", val: "Recyclable" },
+            { label: "Transport", val: "Short" },
+            { label: "Ingredients", val: "Fair trade" }
+        ],
+        supplier: {
+            name: "Tony's Chocolonely B.V.",
+            location: "Amsterdam, NL · Cocoa from Ghana &amp; Ivory Coast",
+            source: "Open Food Facts + brand disclosure"
+        },
+        certs: ["Fair Trade", "Slave-Free Cocoa", "Recyclable", "B-Corp"],
+        alt: { name: "Hands Off! Dark 72%", emoji: "🍫", score: "A" }
+    },
+    {
+        name: "Oatly Oat Drink",
+        sub: "Barista · 1L",
+        emoji: "🥛",
+        score: "A",
+        scoreClass: "score-A",
+        scoreNum: "88/100",
+        breakdown: [
+            { label: "CO₂ impact", val: "−73% vs dairy" },
+            { label: "Packaging", val: "Plant-based" },
+            { label: "Transport", val: "EU sourced" },
+            { label: "Water use", val: "Low" }
+        ],
+        supplier: {
+            name: "Oatly AB",
+            location: "Malmö, Sweden · Oats from Sweden &amp; Finland",
+            source: "Brand-published LCA report"
+        },
+        certs: ["Plant-based", "Vegan", "Carbon-labelled", "FSC packaging"],
+        alt: { name: "Alpro Oat Original", emoji: "🥛", score: "A-" }
+    },
+    {
+        name: "AH Bio Eggs",
+        sub: "Free range · 6 pcs",
+        emoji: "🥚",
+        score: "B",
+        scoreClass: "score-B",
+        scoreNum: "74/100",
+        breakdown: [
+            { label: "CO₂ impact", val: "Medium" },
+            { label: "Packaging", val: "Cardboard" },
+            { label: "Animal welfare", val: "High" },
+            { label: "Transport", val: "Local NL" }
+        ],
+        supplier: {
+            name: "Albert Heijn Biologisch",
+            location: "Sourced from Dutch organic farms",
+            source: "EU Organic database"
+        },
+        certs: ["EU Organic", "Free range", "Local sourcing"],
+        alt: { name: "Demeter Bio Eggs", emoji: "🥚", score: "A-" }
+    },
+    {
+        name: "Imported Avocado",
+        sub: "Peru · per piece",
+        emoji: "🥑",
+        score: "D",
+        scoreClass: "score-D",
+        scoreNum: "38/100",
+        breakdown: [
+            { label: "CO₂ impact", val: "High" },
+            { label: "Water use", val: "Very high" },
+            { label: "Transport", val: "Long-haul" },
+            { label: "Packaging", val: "Loose" }
+        ],
+        supplier: {
+            name: "Multiple importers",
+            location: "Grown in Peru · shipped to NL",
+            source: "EU PEF + customs data"
+        },
+        certs: ["No certification verified"],
+        alt: { name: "Seasonal pear (NL)", emoji: "🍐", score: "A" }
+    }
+];
+
+function renderDetail(i) {
+    const p = productData[i];
+    const html = `
+        <div class="dd-head">
+            <div class="dd-title">
+                <h4>${p.name}</h4>
+                <small>${p.sub}</small>
+            </div>
+            <div class="dd-score-large ${p.scoreClass}">${p.score}</div>
+        </div>
+        <div class="dd-section">
+            <h5>Score breakdown</h5>
+            <div class="dd-breakdown">
+                ${p.breakdown.map(b => `<div class="bd-item"><span>${b.label}</span><span class="bd-val">${b.val}</span></div>`).join('')}
+            </div>
+        </div>
+        <div class="dd-section">
+            <h5>Supplier &amp; origin</h5>
+            <div class="dd-supplier">
+                <strong>${p.supplier.name}</strong>
+                <small>${p.supplier.location}</small>
+                <span class="source-badge">📊 Source: ${p.supplier.source}</span>
+            </div>
+        </div>
+        <div class="dd-section">
+            <h5>Certifications &amp; claims</h5>
+            <div class="dd-tags">
+                ${p.certs.map(c => `<span class="dd-tag">${c}</span>`).join('')}
+            </div>
+        </div>
+        <div class="dd-section" style="margin-bottom:0">
+            <h5>Better alternative</h5>
+            <div class="dd-alt">
+                <span class="alt-emoji" aria-hidden="true">${p.alt.emoji}</span>
+                <span class="alt-name">${p.alt.name}</span>
+                <span class="alt-score">${p.alt.score}</span>
+            </div>
+        </div>
+    `;
+    document.getElementById('demoDetail').innerHTML = html;
+}
+
+document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', () => {
+        document.querySelectorAll('.product-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        renderDetail(parseInt(card.dataset.product, 10));
+    });
+});
+renderDetail(0);
+
+/* ── WEEKLY MEAL PLAN ── */
+const meals = [
+    { emoji: "🍝", name: "Whole-wheat Pesto Pasta", details: "30 min · 520 kcal · Vegetarian", tags: ["Local basil", "Low CO₂", "High fibre"] },
+    { emoji: "🥗", name: "Mediterranean Chickpea Bowl", details: "25 min · 480 kcal · Plant-based", tags: ["Seasonal", "Local produce", "High fibre"] },
+    { emoji: "🍲", name: "Lentil &amp; Sweet Potato Curry", details: "40 min · 560 kcal · Plant-based", tags: ["High protein", "Iron-rich", "Low CO₂"] },
+    { emoji: "🌯", name: "Black Bean Burrito Wrap", details: "20 min · 540 kcal · Vegetarian", tags: ["Fibre-rich", "Quick", "Balanced"] },
+    { emoji: "🍛", name: "Coconut Tofu Bowl", details: "35 min · 510 kcal · Plant-based", tags: ["Protein-rich", "Seasonal veg", "Asian"] },
+    { emoji: "🥘", name: "Veggie Risotto with Mushrooms", details: "45 min · 590 kcal · Vegetarian", tags: ["Comforting", "Local mushrooms", "Whole grain"] },
+    { emoji: "🍜", name: "Miso Soba Noodle Soup", details: "30 min · 470 kcal · Plant-based", tags: ["Light", "Umami", "Low CO₂"] }
+];
+
+function renderMeal(i) {
+    const m = meals[i];
+    document.getElementById('weekMeal').innerHTML = `
+        <div class="wm-emoji" aria-hidden="true">${m.emoji}</div>
+        <div class="wm-info">
+            <strong>${m.name}</strong>
+            <small>${m.details}</small>
+            <div class="wm-tags">
+                ${m.tags.map(t => `<span class="wm-tag">${t}</span>`).join('')}
+            </div>
+        </div>
+    `;
+}
+
+document.querySelectorAll('.week-day').forEach(day => {
+    day.addEventListener('click', () => {
+        document.querySelectorAll('.week-day').forEach(d => d.classList.remove('active'));
+        day.classList.add('active');
+        renderMeal(parseInt(day.dataset.day, 10));
+    });
+});
+
+/* ── EXPANDABLE RISK CARDS ── */
+document.querySelectorAll('.risk-head').forEach(head => {
+    head.addEventListener('click', () => {
+        const card = head.closest('.risk-card');
+        const isOpen = card.classList.contains('open');
+        card.classList.toggle('open');
+        head.setAttribute('aria-expanded', !isOpen);
+    });
+});
+
+/* ── MOBILE NAV TOGGLE ── */
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.getElementById('primary-nav');
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    const expanded = navLinks.classList.contains('open');
+    menuToggle.setAttribute('aria-expanded', expanded);
+});
+navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    });
+});
+
+/* ── ANIMATE NUTRITION BARS ON FIRST VIEW ── */
+const bars = document.querySelectorAll('.nb-fill');
+bars.forEach(b => { const w = b.style.width; b.style.width = '0'; setTimeout(() => b.style.width = w, 250); });
+</script>
+</body>
+</html>
